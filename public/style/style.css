@@ -1,0 +1,11 @@
+body {
+    /* Set the background image */
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
+    position: cover;
+      /* Full height */
+    height: 100%; 
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-size: cover;
+}

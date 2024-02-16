@@ -1,34 +1,27 @@
 //Login Form
-function loginForm() {
+function loginForm(mail,pass) {
 
     // Email and Password Regex for validation
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+\\|[\]{};:/?\.><])[A-Za-z\d!@#$%^&*()-_=+\\|[\]{};:/?\.><]{6,}$/;
     
     // Accessing form data
-    var rules = document.getElementById('rules');
-    var email = document.getElementById('email');
-    var password = document.getElementById('password');
-    var validation = document.getElementById('validation');
     var errors = "";
     var validate = true;
 
     //.test compares email field with regex.
-    if (!emailRegex.test(email.value)) {
+    if (!emailRegex.test(mail)) {
         errors += '<p style="color:red;">Please enter a valid email address.</p>';
-        email.focus();
         validate = false;
     }
 
     //.test compares email field with regex.
-    if (!passRegex.test(password.value)) {
+    if (!passRegex.test(pass)) {
         errors += '<p style="color:red;">Please enter a valid password.<p>';
-        password.focus();
         validate = false;
     }
 
-    if(!validate){
-        validation.innerHTML = errors;
+    /*if(!validate){
         rules.innerHTML = `<p>*Valid email address</p>
         <p>*Minimum 6 Characters</p>
         <p>*Must Include an Uppercase Character</p>
@@ -37,18 +30,20 @@ function loginForm() {
         <p>Must Include a Special Character (!, @, #, etc.)</p>
         <p>Supported special characters are: ! @ # $ % ^ & * ( ) - _ = + \ | [ ] { } ; : / ? . > <</p>`
         return false;
+    }*/
+    if(!validate){
+        return false
     }
+    return true;
 
-    // show the data
-    alert("email: " + email.value + " pass: " + password.value);
 }
 
 
 
-
+/*
 //SignUp form
 function signUpForm() {
-
+    
     // Email and Password Regex for validation
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+\\|[\]{};:/?\.><])[A-Za-z\d!@#$%^&*()-_=+\\|[\]{};:/?\.><]{6,}$/;
@@ -101,6 +96,7 @@ function signUpForm() {
     modalEmail.innerText = email.value;
     modalPassword.innerText = password.value;
     $('#signupModal').modal('show');
+    
 }
 
 
@@ -157,3 +153,9 @@ function openEmailClient() {
     // Open the default email client with the specified parameters
     window.location.href = mailtoLink;
 }
+*/
+
+
+module.exports = {
+    loginForm
+};
