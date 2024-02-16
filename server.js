@@ -1,23 +1,33 @@
-var http = require('http');
-var url = require('url');
-var fs = require('fs');
+// Import required modules
+const express = require('express');
+const path = require('path');
 
+// Create an Express application
+const app = express();
 
+// Define a route for the root URL that serves the HTML page
+app.get('/', function (req, res) {
+  // Construct the file path to the HTML file
+  const filePath = path.join(__dirname, 'index.html');
+  // Send the HTML file as a response
+  res.sendFile(filePath);
+});
 
-http.createServer(function (req, res) {
-  var q = url.parse(req.url, true);
-  var filename = "." + q.pathname;
-  fs.readFile(filename, function(err, data) {
-    if (err) {
-      res.writeHead(404, {'Content-Type': 'text/html'});
-      return res.end("404 Not Found");
-    } 
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(data);
-    return res.end();
-  });
-}).listen(8080);
+app.get('/login', function (req, res) {
+  // Construct the file path to the HTML file
+  const filePath = path.join(__dirname, 'login.html');
+  // Send the HTML file as a response
+  res.sendFile(filePath);
+});
 
+app.get('/signup', function (req, res) {
+  // Construct the file path to the HTML file
+  const filePath = path.join(__dirname, 'signup.html');
+  // Send the HTML file as a response
+  res.sendFile(filePath);
+});
 
-
-
+// Start the server on port 8080
+app.listen(8080, function () {
+  console.log('Server is running on http://localhost:8080');
+});
