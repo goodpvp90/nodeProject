@@ -1,0 +1,17 @@
+body {
+    /* Set the background image */
+    background-image: url(/images/background.jpg);
+    background-repeat: no-repeat;
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-size: cover;
+}
+
+/* Media query to set a different background image for phones */
+/* @media only screen and (max-width: 900px) {
+    body {
+        background-image: url(/images/background-phone.jpg);
+    }
+} */

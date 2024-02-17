@@ -1,27 +1,27 @@
 //Login Form
-function loginForm(mail,pass) {
+function loginForm(mail, pass) {
+  // Email and Password Regex for validation
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var passRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+\\|[\]{};:/?\.><])[A-Za-z\d!@#$%^&*()-_=+\\|[\]{};:/?\.><]{6,}$/;
 
-    // Email and Password Regex for validation
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+\\|[\]{};:/?\.><])[A-Za-z\d!@#$%^&*()-_=+\\|[\]{};:/?\.><]{6,}$/;
-    
-    // Accessing form data
-    var errors = "";
-    var validate = true;
+  // Accessing form data
+  var errors = "";
+  var validate = true;
 
-    //.test compares email field with regex.
-    if (!emailRegex.test(mail)) {
-        errors += '<p style="color:red;">Please enter a valid email address.</p>';
-        validate = false;
-    }
+  //.test compares email field with regex.
+  if (!emailRegex.test(mail)) {
+    errors += '<p style="color:red;">Please enter a valid email address.</p>';
+    validate = false;
+  }
 
-    //.test compares email field with regex.
-    if (!passRegex.test(pass)) {
-        errors += '<p style="color:red;">Please enter a valid password.<p>';
-        validate = false;
-    }
+  //.test compares email field with regex.
+  if (!passRegex.test(pass)) {
+    errors += '<p style="color:red;">Please enter a valid password.<p>';
+    validate = false;
+  }
 
-    /*if(!validate){
+  /*if(!validate){
         rules.innerHTML = `<p>*Valid email address</p>
         <p>*Minimum 6 Characters</p>
         <p>*Must Include an Uppercase Character</p>
@@ -31,14 +31,11 @@ function loginForm(mail,pass) {
         <p>Supported special characters are: ! @ # $ % ^ & * ( ) - _ = + \ | [ ] { } ; : / ? . > <</p>`
         return false;
     }*/
-    if(!validate){
-        return false
-    }
-    return true;
-
+  if (!validate) {
+    return false;
+  }
+  return true;
 }
-
-
 
 /*
 //SignUp form
@@ -155,7 +152,6 @@ function openEmailClient() {
 }
 */
 
-
 module.exports = {
-    loginForm
+  loginForm,
 };
