@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script src="scripts/script.js"></script>
-  <script src="scripts/signup.js"></script>
+  <script src="/scripts/signup.js"></script>
   <link rel="stylesheet" href="/styles/style.css" />
 </head>
 
@@ -16,29 +15,49 @@
 
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-6 col-lg-4">
-      <h2 id="login-title">Sign Up for an Account</h2>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fas fa-user"></i></span>
+      <form method="POST" action="/signup" onsubmit="return signUpForm()">
+        <h2 id="login-title">Sign Up for an Account</h2>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <input name ="fname" id="firstname" type="text" class="form-control" placeholder="First Name" required>
         </div>
-        <input id="email" type="text" class="form-control" placeholder="Email" required>
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <input name="lname" id="lname" type="text" class="form-control" placeholder="Last Name" required>
         </div>
-        <input id="password" type="password" class="form-control" placeholder="Password" required>
-      </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <input name="email" id="email" type="text" class="form-control" placeholder="Email" required>
         </div>
-        <input id="confirm-password" type="password" class="form-control" placeholder="Repeat Password" required>
-      </div>
-      <button type="button" onclick="signUpForm()" class="btn btn-primary btn-block">Create My Account</button>
-      <p>Already have an account? <a href="log-in">Log in</a></p>
-      <div id="validation"></div>
-      <div id="rules"></div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <input name="phone" id="phone" type="text" class="form-control" placeholder="Phone Number" required>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          </div>
+          <input name="password" id="password" type="password" class="form-control" placeholder="Password" required>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          </div>
+          <input id="confirm-password" type="password" class="form-control" placeholder="Repeat Password" required>
+        </div>
+        <button  type="submit" class="btn btn-primary btn-block">Create My Account</button>
+        <p>Already have an account? <a href="/log-in">Log in</a></p>
+        <div id="validation"></div>
+        <div id="rules"></div>
+      </form>
     </div>
   </div>
 
@@ -68,6 +87,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const show = urlParams.get("show");
+    if(show){
+      email = urlParams.get("email");
+      password = urlParams.get("password");
+      modalEmail = document.getElementById("modalEmail");
+      modalPassword = document.getElementById("modalPassword");
+      modalEmail.innerHTML = email;
+      modalPassword.innerHTML = password;
+      $('#signupModal').modal('show');
+    }
+  </script>
 
 
 </body>

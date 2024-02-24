@@ -19,7 +19,8 @@ function createUsersTable() {
                 firstname TEXT,
                 lastname TEXT,
                 email TEXT UNIQUE,
-                password TEXT
+                password TEXT,
+                phone_number TEXT UNIQUE
             )`, (err) => {
         if (err) {
             console.error('Error creating users table:', err.message);
@@ -31,39 +32,34 @@ function createUsersTable() {
 
 
 // Function to insert a new user into the database
-function createUser(firstname, lastname, email, password) {
-    db.run(`INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)`, [firstname, lastname, email, password], function (err) {
-        if (err) {
-            console.error('Error inserting data:', err.message);
-        } else {
-            console.log(`A new user has been inserted with ID ${this.lastID}`);
-        }
-    });
+function createUser(firstname, lastname, email, phone, password, callback) {
+    db.run(`INSERT INTO users (firstname, lastname, email, password, phone_number) VALUES (?, ?, ?, ?, ?)`, [firstname, lastname, email, password, phone], callback);
+    // function (err) {
+    //     if (err) {
+    //         console.error('Error inserting data:', err.message);
+    //     } else {
+    //         console.log(`A new user has been inserted with ID ${this.lastID}`);
+    //         return true;
+    //     }
+    // }
+
 }
 
 // Function to validate login credentials
-function validateLogin(email, password) {
-    db.get(`SELECT * FROM users WHERE email = ? AND password = ?`, [email, password], function (err, row) {
-        if (err) {
-            console.error('Error querying database:', err.message);
-        } else {
-            if (row) {
-                console.log('Login successful');
-                return true;
-                // Do something after successful login, like redirecting to another page
-            } else {
-                console.log('/log-in?error=Incorrect email or password');
-                return '/log-in?error=Incorrect email or password';
-                // Handle invalid login, such as displaying an error message to the user
-            }
-        }
-    });
+function validateLogin(email, password, callback) {
+    db.get(`SELECT * FROM users WHERE email = ? AND password = ?`, [email, password], callback);
+}
+
+// Function to validate email-restore(password) credentials
+function validateEmail(email, callback) {
+    db.get(`SELECT password FROM users WHERE email = ?`, [email], callback);
 }
 
 // Exporting functions to make them accessible from other files
 module.exports = {
-    createUser: createUser,
-    validateLogin: validateLogin,
+    createUser,
+    validateLogin,
+    validateEmail,
     closeConnection: () => db.close((err) => {
         if (err) {
             console.error('Error closing database connection:', err.message);
