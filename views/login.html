@@ -19,7 +19,7 @@
     >
       <div class="col-md-6 col-lg-4">
         <form method="POST" action="/log-in">
-          <h2 id="login-title whi">Log in to Your Account</h2>
+          <h2 id="login-title">Log in to Your Account YOLOMOLODOLO ELDAR CHANGE MUHAHAHA</h2>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -55,23 +55,12 @@
         <script>
           const urlParams = new URLSearchParams(window.location.search);
           const error = urlParams.get("error");
-          const errorMessage = document.createElement("p");
-          errorMessage.classList.add("text-danger");
-    
-          document.querySelector("form").appendChild(errorMessage);
-          switch(error) {
-            case 'it is not an email':
-              errorMessage.textContent = "type an email please";  
-              document.querySelector("form").appendChild(errorMessage);
-              break;
-            case 'Incorrect email or password':
-              errorMessage.textContent = "Incorrect email or password";  
-              document.querySelector("form").appendChild(errorMessage);
-              break;
-            default:
-              // code block
+          if (error) {
+            const errorMessage = document.createElement("p");
+            errorMessage.classList.add("text-danger");
+            errorMessage.textContent = "Invalid username or password";
+            document.querySelector("form").appendChild(errorMessage);
           }
-          
         </script>
       </div>
     </div>
