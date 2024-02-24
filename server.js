@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const loginVal = require('./public/scripts/login.js');
+const signupVal = require('./public/scripts/signup.js');
+const db = require('./db.js');
 
 const app = express();
 
@@ -10,14 +13,17 @@ app.use(express.static('public'));
 // Handle login form submission
 app.post('/log-in', function (req, res) {
   const { username, password } = req.body;
-
-  // Check if username and password are correct
-  if (username === 'Admin' && password === 'Admin') {
+  var login = loginVal.loginForm(username, password)
+  if (login != true)
+    res.redirect(login);
+  else {
     // Redirect to contact form or send contact form HTML
-    res.sendFile(path.join(__dirname, 'views/contact.html'));
-  } else {
-    // Redirect to login page with error message in query parameter
-    res.redirect('/log-in?error=Incorrect username or password');
+    var val = db.validateLogin(username, password);
+    if (val == true)
+      res.sendFile(path.join(__dirname, 'views/contact.html'));
+    else {
+      res.redirect(val)
+    }
   }
 });
 
@@ -41,13 +47,6 @@ app.get('/signup', function (req, res) {
   const filePath = path.join(__dirname, 'views/signup.html');
   // Send the HTML file as a response
   res.sendFile(filePath);
-});
-
-app.get('/api/users', function (req, res) {
-  var user_id = req.query.id;
-  var token = req.query.token;
-  var geo = req.query.geo;
-  res.send(user_id + ' ' + token + ' ' + geo);
 });
 
 // Start the server on port 8080
