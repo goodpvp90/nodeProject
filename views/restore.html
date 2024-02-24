@@ -17,8 +17,8 @@
     <div
       class="container d-flex justify-content-center align-items-center vh-100">
       <div class="col-md-6 col-lg-4">
-        <form method="POST" action="/log-in">
-          <h2 id="login-title whi">Log in to Your Account</h2>
+        <form method="POST" action="/restore">
+          <h2 id="login-title whi">Recover Password</h2>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -28,46 +28,34 @@
               name="username"
               type="text"
               class="form-control"
-              placeholder="Email or Phone"
-              required
-            />
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-lock"></i></span>
-            </div>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              class="form-control"
-              placeholder="Password"
+              placeholder="Email"
               required
             />
           </div>
           <button type="submit" class="btn btn-primary btn-block">
-            Log in
+            Recover Password
           </button>
           <p>Need an account? <a href="Signup">Sign up</a></p>
-          <p>Forgot password? <a href="restore">Restore Password</a></p>
         </form>
 
         <script>
           const urlParams = new URLSearchParams(window.location.search);
-          const error = urlParams.get("error");
-          const errorMessage = document.createElement("p");
-          errorMessage.classList.add("text-danger");
+          const result = urlParams.get("result");
+          const resultMessage = document.createElement("p");
+          resultMessage.classList.add("text-danger");
     
-          document.querySelector("form").appendChild(errorMessage);
-          switch(error) {
-            case 'it is not an email':
-              errorMessage.textContent = "type an email please";  
-              document.querySelector("form").appendChild(errorMessage);
+          document.querySelector("form").appendChild(resultMessage);
+          switch(result) {
+            case 'false':
+              resultMessage.textContent = "Email not found";  
               break;
-            case 'Incorrect email or password':
-              errorMessage.textContent = "Incorrect email or password";  
-              document.querySelector("form").appendChild(errorMessage);
+            case 'true':
+              const email = urlParams.get("email")
+              resultMessage.textContent = `Password sent to ${email}`;  
               break;
+            default:
+                document.querySelector("form").appendChild(resultMessage);
+
           }
           
         </script>

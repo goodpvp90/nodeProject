@@ -1,9 +1,8 @@
 //SignUp form
 function signUpForm() {
-
+    alert("test");
     // Email and Password Regex for validation
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+\\|[\]{};:/?\.><])[A-Za-z\d!@#$%^&*()-_=+\\|[\]{};:/?\.><]{6,}$/;
 
     // Accessing form data
     var validation = document.getElementById('validation');
@@ -12,22 +11,14 @@ function signUpForm() {
     var email = document.getElementById('email');
     var password = document.getElementById('password');
     var confirmPass = document.getElementById('confirm-password');
-    // Example: Log the data
-    var modalEmail = document.getElementById('modalEmail');
-    var modalPassword = document.getElementById('modalPassword');
-    var modal = document.getElementById('signupModal');
+    var phone = document.getElementById('phone');
+    var fname = document.getElementById('fname');
+    var lname = document.getElementById('lname');
 
     //.test compares email field with regex.
     if (!emailRegex.test(email.value)) {
         errors += '<p style="color:red;">Please enter a valid email address.</p>';
         email.focus();
-        validate = false;
-    }
-
-    //.test compares email field with regex.
-    if (!passRegex.test(password.value)) {
-        errors += '<p style="color:red;">Please enter a valid password.</p>';
-        password.focus();
         validate = false;
     }
 
@@ -37,6 +28,7 @@ function signUpForm() {
         confirmPass.focus();
         validate = false;
     }
+
 
     if (!validate) {
         validation.innerHTML = errors;
@@ -50,8 +42,5 @@ function signUpForm() {
         return false;
     }
 
-    modalEmail.innerText = email.value;
-    modalPassword.innerText = password.value;
-    $('#signupModal').modal('show');
-
+    return true;
 }
