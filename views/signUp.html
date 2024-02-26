@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Page Title</title>
+  <title>SignUp</title>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -91,6 +91,10 @@
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const show = urlParams.get("show");
+    const error = urlParams.get("error");
+    const errorMessage = document.createElement("p");
+    errorMessage.classList.add("text-danger");
+    document.querySelector("form").appendChild(errorMessage);
     if(show){
       email = urlParams.get("email");
       password = urlParams.get("password");
@@ -100,6 +104,16 @@
       modalPassword.innerHTML = password;
       $('#signupModal').modal('show');
     }
+    switch(error) {
+            case 'Email already exists':
+              errorMessage.textContent = "Email already exists";  
+              break;
+            case 'Phone number already exists':
+              errorMessage.textContent = "Phone number already exists";  
+              break;
+            default : 
+              document.querySelector("form").appendChild(errorMessage);
+          }
   </script>
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login</title>
+    <title>Reset Password</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -17,18 +17,18 @@
     <div
       class="container d-flex justify-content-center align-items-center vh-100">
       <div class="col-md-6 col-lg-4">
-        <form method="POST" action="/log-in">
-          <h2 id="login-title whi">Log in to Your Account</h2>
+        <form method="POST" action="/newpass">
+          <h2 id="login-title whi">Reset Password</h2>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
             </div>
             <input
-              id="email"
-              name="username"
+              id="password"
+              name="password"
               type="text"
               class="form-control"
-              placeholder="Email or Phone"
+              placeholder="New Password"
               required
             />
           </div>
@@ -37,33 +37,34 @@
               <span class="input-group-text"><i class="fas fa-lock"></i></span>
             </div>
             <input
-              id="password"
-              name="password"
+              id="rpassword"
+              name="rpassword"
               type="password"
               class="form-control"
-              placeholder="Password"
+              placeholder=" Repeat Password"
               required
             />
           </div>
           <button type="submit" class="btn btn-primary btn-block">
-            Log in
+            Reset
           </button>
-          <p>Need an account? <a href="Signup">Sign up</a></p>
-          <p>Forgot password? <a href="restore">Restore Password</a></p>
         </form>
 
         <script>
           const urlParams = new URLSearchParams(window.location.search);
-          const error = urlParams.get("error");
+          const error = urlParams.get("result");
           const errorMessage = document.createElement("p");
           errorMessage.classList.add("text-danger"); 
           document.querySelector("form").appendChild(errorMessage);
           switch(error) {
-            case 'it is not an email':
-              errorMessage.textContent = "type an email please";  
+            case 'true':
+              errorMessage.textContent = "Password has been reset!";  
               break;
-            case 'Incorrect email or password':
-              errorMessage.textContent = "Incorrect email or password";  
+            case 'false':
+              errorMessage.textContent = "Password not resetted!";  
+              break;
+            case 'not match':
+              errorMessage.textContent = "Password are different!";  
               break;
             default:
               document.querySelector("form").appendChild(errorMessage);

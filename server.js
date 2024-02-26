@@ -26,6 +26,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 
+
+// Handle Reset Password form submission
+app.post('/newpass', function (req, res) {
+  const { password, rpassword } = req.body;
+  if (password != rpassword) {
+    res.redirect('/newpass?result=not match');//handle in different js file.
+  }
+  else {
+    // Redirect to contact form or send contact form HTML
+    db.resetPassword(password, req.session.userId, function (err, row) {
+      if (err)
+        res.redirect('/newpass?result=false')
+      else {
+        res.redirect(`/newpass?result=true`)
+      }
+    });
+  }
+});
+
 // Handle Recover Password form submission
 app.post('/restore', function (req, res) {
   const { username } = req.body;
@@ -58,10 +77,17 @@ app.post('/log-in', function (req, res) {
 app.post('/signup', function (req, res) {
   const { fname, lname, password, email, phone } = req.body;
   // ADD BACKEND CHECK FOR THE PARAMETERS.
-  console.log(req.body);
   db.createUser(fname, lname, email, phone, password, function (err, _row) {
     if (err) {
-      res.redirect('/log-in?error=Incorrect email or password') // TODO
+      if (err.code === 'SQLITE_CONSTRAINT' && err.errno === 19) {
+        // SQLite constraint violation, check if it's for the phone number
+        if (err.message.includes('phone_number')) {
+          res.redirect('/signup?error=Phone number already exists');
+        }
+        if (err.message.includes('email')) {
+          res.redirect('/signup?error=Email already exists');
+        }
+      }
     } else {
       console.log("register success");
       res.redirect(`/signup/?show=true&email=${email}&password=${password}`)
@@ -69,7 +95,7 @@ app.post('/signup', function (req, res) {
   })
 });
 
-// Define a route for the root URL that serves the HTML page
+// Index page
 app.get('/', requireAuth, function (req, res) {
   // Construct the file path to the HTML file
   const filePath = path.join(__dirname, 'views/index.html');
@@ -89,6 +115,15 @@ app.get('/log-in', function (req, res) {
     res.sendFile(filePath);
   }
 });
+
+// Index page
+app.get('/newpass', requireAuth, function (req, res) {
+  // Construct the file path to the HTML file
+  const filePath = path.join(__dirname, 'views/newpass.html');
+  // Send the HTML file as a response
+  res.sendFile(filePath);
+});
+
 
 app.get('/restore', function (req, res) {
   if (req.session.userId) {
@@ -117,10 +152,13 @@ app.get('/logout', function (req, res) {
 });
 
 app.get('/signup', function (req, res) {
-  // Construct the file path to the HTML file
-  const filePath = path.join(__dirname, 'views/signup.html');
-  // Send the HTML file as a response
-  res.sendFile(filePath);
+  if (req.session.userId) {
+    res.redirect('/');
+  }
+  else {
+    const filePath = path.join(__dirname, 'views/signup.html');
+    res.sendFile(filePath);
+  }
 });
 
 // Start the server on port 8080

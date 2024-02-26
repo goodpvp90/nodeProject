@@ -34,14 +34,6 @@ function createUsersTable() {
 // Function to insert a new user into the database
 function createUser(firstname, lastname, email, phone, password, callback) {
     db.run(`INSERT INTO users (firstname, lastname, email, password, phone_number) VALUES (?, ?, ?, ?, ?)`, [firstname, lastname, email, password, phone], callback);
-    // function (err) {
-    //     if (err) {
-    //         console.error('Error inserting data:', err.message);
-    //     } else {
-    //         console.log(`A new user has been inserted with ID ${this.lastID}`);
-    //         return true;
-    //     }
-    // }
 
 }
 
@@ -55,11 +47,17 @@ function validateEmail(email, callback) {
     db.get(`SELECT password FROM users WHERE email = ?`, [email], callback);
 }
 
+// Function to validate email-restore(password) credentials
+function resetPassword(newpass, email, callback) {
+    db.get(`UPDATE users set password = ? WHERE email = ?`, [newpass, email], callback);
+}
+
 // Exporting functions to make them accessible from other files
 module.exports = {
     createUser,
     validateLogin,
     validateEmail,
+    resetPassword,
     closeConnection: () => db.close((err) => {
         if (err) {
             console.error('Error closing database connection:', err.message);
