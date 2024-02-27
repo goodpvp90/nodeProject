@@ -48,6 +48,12 @@ function validateEmail(email, callback) {
 }
 
 // Function to validate email-restore(password) credentials
+function getFname(email, callback) {
+    db.get(`SELECT firstname FROM users WHERE email = ?`, [email], callback);
+}
+
+
+// Function to validate email-restore(password) credentials
 function resetPassword(newpass, email, callback) {
     db.get(`UPDATE users set password = ? WHERE email = ?`, [newpass, email], callback);
 }
@@ -58,6 +64,7 @@ module.exports = {
     validateLogin,
     validateEmail,
     resetPassword,
+    getFname: getFname,
     closeConnection: () => db.close((err) => {
         if (err) {
             console.error('Error closing database connection:', err.message);

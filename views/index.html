@@ -14,6 +14,16 @@
 
         body {
             display: flex;
+            flex-direction: column;
+        }
+
+        #header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         #menu {
@@ -23,14 +33,13 @@
             width: 20%;
             box-sizing: border-box;
             text-align: center;
-            height: 100vh; /* Set height to 100% of the viewport height */
+            flex: 0 0 auto; /* Let the menu shrink when necessary */
         }
 
         #content {
             flex: 1;
             padding: 20px;
             box-sizing: border-box;
-            min-height: 100vh; /* Set minimum height to 100% of the viewport height */
             position: relative; /* Make the container relative */
         }
 
@@ -51,19 +60,34 @@
         }
 
         /* Styles for the button */
-        #content a.button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+        .logout {
             background-color: #3498db;
             color: #fff;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
         }
+
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            #menu {
+                width: 100%;
+                height: auto;
+                padding-bottom: 50px; /* Adjust padding for space for buttons */
+            }
+
+            #content {
+                width: 100%;
+                padding-top: 50px; /* Adjust padding to move content below buttons */
+            }
+        }
     </style>
 </head>
 <body>
+    <div id="header">
+        <div class="username">Hello {{firstname}}</div>
+        <div class="logout"><a href="/logout">Logout</a></div>
+    </div>
     <div id="menu">
         <h2>Menu</h2>
         <ul>
@@ -77,10 +101,8 @@
             <li><a href="#">I would like to take a loan higher than 100k ISL</a></li>
         </ul>
     </div>
-
     <div id="content">
         <h1>Content Box</h1>
-        <a href="login.html" class="button">Click Me!</a>
         <p>This is the content of the page. You can add your text, images, and other elements here.</p>
     </div>
 </body>
