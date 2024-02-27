@@ -97,8 +97,12 @@ app.post('/signup', function (req, res) {
 
 // Index page
 app.get('/', requireAuth, function (req, res) {
+  email = req.session.userId;
+  db.getFname(email, function (err, _row) {
+    fname = _row.fname;
+  });
   // Construct the file path to the HTML file
-  const filePath = path.join(__dirname, 'views/index.html');
+  const filePath = path.join(__dirname, `views/index.html?fname=${fname}`);
   // Send the HTML file as a response
   res.sendFile(filePath);
 });
@@ -141,7 +145,7 @@ app.get('/restore', function (req, res) {
 app.get('/logout', function (req, res) {
   if (req.session.userId) {
     req.session.destroy();
-    res.redirect('/login');
+    res.redirect('/log-in');
   }
   else {
     // Construct the file path to the HTML file
