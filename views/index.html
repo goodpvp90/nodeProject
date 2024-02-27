@@ -1,1 +1,87 @@
-<H1>Waiting for Roee and Eldar to make the FUCKING INDEX!</H1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu and Content Page</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+        }
+
+        #menu {
+            background-color: #9ec928;
+            color: #fff;
+            padding: 20px;
+            width: 20%;
+            box-sizing: border-box;
+            text-align: center;
+            height: 100vh; /* Set height to 100% of the viewport height */
+        }
+
+        #content {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            min-height: 100vh; /* Set minimum height to 100% of the viewport height */
+            position: relative; /* Make the container relative */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Styles for the button */
+        #content a.button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#">Home Page</a></li>
+            <li><a href="#">I would like to take a new mortgage</a></li>
+            <li><a href="#">I would like to check the best mortgage options</a></li>
+            <li><a href="#">I would like to take a loan</a></li>
+            <li><a href="#">I would like to take a loan lower than 100k ISL</a></li>
+            <li><a href="#">I would like to take one loan</a></li>
+            <li><a href="#">I would like to take a couple loans</a></li>
+            <li><a href="#">I would like to take a loan higher than 100k ISL</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <h1>Content Box</h1>
+        <a href="login.html" class="button">Click Me!</a>
+        <p>This is the content of the page. You can add your text, images, and other elements here.</p>
+    </div>
+</body>
+</html>
