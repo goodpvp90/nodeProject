@@ -1,1 +1,109 @@
-<H1>Waiting for Roee and Eldar to make the FUCKING INDEX!</H1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu and Content Page</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #menu {
+            background-color: #9ec928;
+            color: #fff;
+            padding: 20px;
+            width: 20%;
+            box-sizing: border-box;
+            text-align: center;
+            flex: 0 0 auto; /* Let the menu shrink when necessary */
+        }
+
+        #content {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative; /* Make the container relative */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Styles for the button */
+        .logout {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            #menu {
+                width: 100%;
+                height: auto;
+                padding-bottom: 50px; /* Adjust padding for space for buttons */
+            }
+
+            #content {
+                width: 100%;
+                padding-top: 50px; /* Adjust padding to move content below buttons */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="username">Hello {{firstname}}</div>
+        <div class="logout"><a href="/logout">Logout</a></div>
+    </div>
+    <div id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#">Home Page</a></li>
+            <li><a href="#">I would like to take a new mortgage</a></li>
+            <li><a href="#">I would like to check the best mortgage options</a></li>
+            <li><a href="#">I would like to take a loan</a></li>
+            <li><a href="#">I would like to take a loan lower than 100k ISL</a></li>
+            <li><a href="#">I would like to take one loan</a></li>
+            <li><a href="#">I would like to take a couple loans</a></li>
+            <li><a href="#">I would like to take a loan higher than 100k ISL</a></li>
+        </ul>
+    </div>
+    <div id="content">
+        <h1>Content Box</h1>
+        <p>This is the content of the page. You can add your text, images, and other elements here.</p>
+    </div>
+</body>
+</html>
