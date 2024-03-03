@@ -5,7 +5,8 @@ const db = require('./db.js');
 const session = require('express-session');
 const mailer = require('./mailer.js');
 const app = express();
-const fs = require('fs');
+const ejs = require('ejs');
+
 
 const requireAuth = (req, res, next) => {
   if (req.session.userId) {
@@ -92,34 +93,43 @@ app.post('/signup', function (req, res) {
       }
     } else {
       console.log("register success");
-      res.redirect(`/signup/?show=true&email=${email}&password=${password}`)
+      res.redirect(`/signup/?show=true&email=${email}&password=${password}`);
     }
   })
 });
 
 
-app.get('/', requireAuth, function (req, res) {
-  email = req.session.userId;
-  db.getFname(email, function (err, row) {
-    const firstname = row.firstname;
+// Index page
+app.get('/', function (req, res) {
+  let templatePath = path.join(__dirname, 'views', 'index.ejs');
+  let templateData = {};
 
-    // Read the HTML file
-    const indexPath = path.join(__dirname, 'views', 'index.html');
-    fs.readFile(indexPath, 'utf8', function (err, data) {
-      if (err) {
-        return res.status(500).send('Error reading file');
-      }
-      // Replace placeholders in the HTML with dynamic data
-      const modifiedHTML = data.replace('{{firstname}}', firstname);
-      // Send the modified HTML content as the response
-      res.send(modifiedHTML);
+  if (req.session.userId) {
+    db.getFname(req.session.userId, function (err, row) {
+      templateData.firstname = row.firstname;
+      renderTemplate(templatePath, templateData, res);
     });
+  } else {
+    templateData.firstname = "אורח";
+    renderTemplate(templatePath, templateData, res);
+  }
+});
+
+
+function renderTemplate(templatePath, templateData, res) {
+  ejs.renderFile(templatePath, templateData, function (err, renderedHtml) {
+    if (err) {
+      res.status(500).send('Error rendering template');
+    } else {
+      res.send(renderedHtml);
+    }
   });
+}
 
 app.get('/log-in', function (req, res) {
   if (req.session.userId) {
     // If the user is already logged in, redirect to the homepage
-    res.redirect('');
+    res.redirect('/');
   }
   else {
     // Construct the file path to the HTML file
@@ -154,7 +164,7 @@ app.get('/restore', function (req, res) {
 app.get('/logout', function (req, res) {
   if (req.session.userId) {
     req.session.destroy();
-    res.redirect('/log-in');
+    res.redirect('/');
   }
   else {
     // Construct the file path to the HTML file

@@ -48,17 +48,19 @@
           <button type="submit" class="btn btn-primary btn-block">
             איפוס
           </button>
+          <a href="/">חזרה לדף הראשי</a>
         </form>
 
         <script>
           const urlParams = new URLSearchParams(window.location.search);
           const error = urlParams.get("result");
           const errorMessage = document.createElement("p");
+
           errorMessage.classList.add("text-danger"); 
           document.querySelector("form").appendChild(errorMessage);
           switch(error) {
             case 'true':
-              errorMessage.textContent = "Password has been reset!";  
+              errorMessage.textContent = "Password has been reset!";
               break;
             case 'false':
               errorMessage.textContent = "Password not resetted!";  
