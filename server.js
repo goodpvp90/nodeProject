@@ -5,6 +5,7 @@ const db = require('./db.js');
 const session = require('express-session');
 const mailer = require('./mailer.js');
 const app = express();
+const fs = require('fs');
 
 const requireAuth = (req, res, next) => {
   if (req.session.userId) {
@@ -68,7 +69,8 @@ app.post('/log-in', function (req, res) {
       res.redirect('/log-in?error=Incorrect email or password')
     else {
       req.session.userId = username;
-      res.sendFile(path.join(__dirname, 'views/index.html'));
+      //res.sendFile(path.join(__dirname, 'views/index.html'));
+      res.redirect('/');
     }
   });
 });
@@ -95,22 +97,29 @@ app.post('/signup', function (req, res) {
   })
 });
 
-// Index page
+
 app.get('/', requireAuth, function (req, res) {
   email = req.session.userId;
-  db.getFname(email, function (err, _row) {
-    fname = _row.fname;
+  db.getFname(email, function (err, row) {
+    const firstname = row.firstname;
+
+    // Read the HTML file
+    const indexPath = path.join(__dirname, 'views', 'index.html');
+    fs.readFile(indexPath, 'utf8', function (err, data) {
+      if (err) {
+        return res.status(500).send('Error reading file');
+      }
+      // Replace placeholders in the HTML with dynamic data
+      const modifiedHTML = data.replace('{{firstname}}', firstname);
+      // Send the modified HTML content as the response
+      res.send(modifiedHTML);
+    });
   });
-  // Construct the file path to the HTML file
-  const filePath = path.join(__dirname, `views/index.html?fname=${fname}`);
-  // Send the HTML file as a response
-  res.sendFile(filePath);
-});
 
 app.get('/log-in', function (req, res) {
   if (req.session.userId) {
     // If the user is already logged in, redirect to the homepage
-    res.redirect('/');
+    res.redirect('');
   }
   else {
     // Construct the file path to the HTML file

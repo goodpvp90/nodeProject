@@ -49,7 +49,7 @@ function validateEmail(email, callback) {
 
 // Function to validate email-restore(password) credentials
 function getFname(email, callback) {
-    db.get(`SELECT fname FROM users WHERE email = ?`, [email], callback);
+    db.get(`SELECT firstname FROM users WHERE email = ?`, [email], callback);
 }
 
 // Function to validate email-restore(password) credentials
