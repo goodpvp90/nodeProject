@@ -115,6 +115,21 @@ app.get('/', function (req, res) {
   }
 });
 
+// takemortgage page
+app.get('/takemortgage', function (req, res) {
+  let templatePath = path.join(__dirname, 'views', 'takemortgage.ejs');
+  let templateData = {};
+
+  if (req.session.userId) {
+    db.getFname(req.session.userId, function (err, row) {
+      templateData.firstname = row.firstname;
+      renderTemplate(templatePath, templateData, res);
+    });
+  } else {
+    templateData.firstname = "אורח";
+    renderTemplate(templatePath, templateData, res);
+  }
+});
 
 function renderTemplate(templatePath, templateData, res) {
   ejs.renderFile(templatePath, templateData, function (err, renderedHtml) {
@@ -160,6 +175,9 @@ app.get('/restore', function (req, res) {
     res.sendFile(filePath);
   }
 });
+
+
+
 
 app.get('/logout', function (req, res) {
   if (req.session.userId) {
