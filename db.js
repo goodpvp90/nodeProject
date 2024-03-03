@@ -52,7 +52,6 @@ function getFname(email, callback) {
     db.get(`SELECT firstname FROM users WHERE email = ?`, [email], callback);
 }
 
-
 // Function to validate email-restore(password) credentials
 function resetPassword(newpass, email, callback) {
     db.get(`UPDATE users set password = ? WHERE email = ?`, [newpass, email], callback);

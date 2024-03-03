@@ -115,7 +115,6 @@ app.get('/', requireAuth, function (req, res) {
       res.send(modifiedHTML);
     });
   });
-});
 
 app.get('/log-in', function (req, res) {
   if (req.session.userId) {
