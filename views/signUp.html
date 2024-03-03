@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>SignUp</title>
+  <title>הרשמה</title>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -16,45 +16,45 @@
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-6 col-lg-4">
       <form method="POST" action="/signup" onsubmit="return signUpForm()">
-        <h2 id="login-title">Sign Up for an Account</h2>
+        <h2 id="login-title">הרשמה</h2>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-user"></i></span>
           </div>
-          <input name ="fname" id="firstname" type="text" class="form-control" placeholder="First Name" required>
+          <input name ="fname" id="firstname" type="text" class="form-control" placeholder="שם פרטי" required>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-user"></i></span>
           </div>
-          <input name="lname" id="lname" type="text" class="form-control" placeholder="Last Name" required>
+          <input name="lname" id="lname" type="text" class="form-control" placeholder="שם משפחה" required>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-user"></i></span>
           </div>
-          <input name="email" id="email" type="text" class="form-control" placeholder="Email" required>
+          <input name="email" id="email" type="text" class="form-control" placeholder="כתובת מייל" required>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-user"></i></span>
           </div>
-          <input name="phone" id="phone" type="text" class="form-control" placeholder="Phone Number" required>
+          <input name="phone" id="phone" type="text" class="form-control" placeholder="טלפון" required>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-lock"></i></span>
           </div>
-          <input name="password" id="password" type="password" class="form-control" placeholder="Password" required>
+          <input name="password" id="password" type="password" class="form-control" placeholder="סיסמה" required>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-lock"></i></span>
           </div>
-          <input id="confirm-password" type="password" class="form-control" placeholder="Repeat Password" required>
+          <input id="confirm-password" type="password" class="form-control" placeholder="סיסמה חוזרת" required>
         </div>
-        <button  type="submit" class="btn btn-primary btn-block">Create My Account</button>
-        <p>Already have an account? <a href="/log-in">Log in</a></p>
+        <button  type="submit" class="btn btn-primary btn-block">הירשם</button>
+        <p>קיים כבר משתמש? <a href="/log-in">התחברות</a></p>
         <div id="validation"></div>
         <div id="rules"></div>
       </form>
@@ -67,15 +67,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="signupModalLabel">Sign-Up Details</h5>
+          <h5 class="modal-title" id="signupModalLabel">פרטי התחברות</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p><strong>Email:</strong> <span id="modalEmail"></span></p>
-          <p><strong>Password:</strong> <span id="modalPassword"></span></p>
-          <p class="text-success">Account created successfully!</p>
+          <p><strong>אי-מייל:</strong> <span id="modalEmail"></span></p>
+          <p><strong>סיסמה:</strong> <span id="modalPassword"></span></p>
+          <p class="text-success">החשבון נפתח בהצלחה!</p>
         </div>
       </div>
     </div>
