@@ -61,6 +61,13 @@ app.post('/restore', function (req, res) {
   });
 });
 
+// Handle Recover Password form submission
+app.post('/contact', function (req, res) {
+  const { fname,  lname, phone, email, selection, subject } = req.body;
+  mailer.contactForm(fname, lname, phone, email, selection, subject);
+  res.redirect(`/contact?result=true`)
+});
+
 // Handle login form submission
 app.post('/log-in', function (req, res) {
   const { username, password } = req.body;
@@ -158,6 +165,14 @@ app.get('/log-in', function (req, res) {
 app.get('/newpass', requireAuth, function (req, res) {
   // Construct the file path to the HTML file
   const filePath = path.join(__dirname, 'views/newpass.html');
+  // Send the HTML file as a response
+  res.sendFile(filePath);
+});
+
+// Index page
+app.get('/contact', function (req, res) {
+  // Construct the file path to the HTML file
+  const filePath = path.join(__dirname, 'views/contact.html');
   // Send the HTML file as a response
   res.sendFile(filePath);
 });
