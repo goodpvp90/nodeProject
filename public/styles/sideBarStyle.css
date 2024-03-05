@@ -47,6 +47,7 @@ body {
     background-color: #0e2238;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 #sidebar.expand {
@@ -96,14 +97,6 @@ a.sidebar-link {
     white-space: nowrap;
     border-left: 3px solid transparent;
 }
-a.sidebar-link {
-    padding: .625rem 1.625rem;
-    color: #FFF;
-    display: block;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    border-left: 3px solid transparent;
-}
 
 .sidebar-link i {
     font-size: 1.1rem;
@@ -118,6 +111,7 @@ a.sidebar-link:hover {
 .sidebar-item {
     position: relative;
 }
+
 
 #sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
     position: absolute;
@@ -164,3 +158,33 @@ a.sidebar-link:hover {
 .indentless i{
     margin-right: 0.7rem;
 }
+
+.sidebar-link.active {
+    background-color: rgba(255, 255, 255, .075);
+    border-left: 3px solid #3b7ddd;
+  }
+
+  .tooltip-icon {
+    font-size: 1rem;
+    color: #999999;
+    position: absolute;
+    right: 212px;
+    bottom: 13.5px;
+}
+.tooltip-icon .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip-icon:hover .tooltiptext {
+    visibility: visible;
+  }
