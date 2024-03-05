@@ -25,6 +25,34 @@ function restorePassword(email, password) {
     });
 }
 
+
+function contactForm(fname,lname, phone, email, selection, subject ) {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'mashcantarestore@gmail.com',
+            pass: 'zerd opzi lnnr cdrw'
+        }
+    });
+
+    var mailOptions = {
+        from: 'MashcantaRestore@gmail.com',
+        to: `calc.task@gmail.com`,
+        subject: `${selection}`,
+        text: `${fname} ${lname},Contacting us regarding subject: ${subject}, costumer email to reply : ${email}
+        costumer phone : ${phone}`
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+}
+
 module.exports = {
-    restorePassword: restorePassword
+    restorePassword: restorePassword,
+    contactForm: contactForm
 };

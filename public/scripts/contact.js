@@ -37,17 +37,4 @@ function contactForm() {
     return false;
   }
 
-  alert("email: " + email.value + " name: " + name.value);
-}
-
-function openEmailClient() {
-  // Replace 'recipient@example.com' with the recipient's email address
-  // You can also specify other parameters like subject and body
-  var emailAddress = 'recipient@example.com';
-
-  var mailtoLink = 'mailto:' + encodeURIComponent(emailAddress);
-
-
-  // Open the default email client with the specified parameters
-  window.location.href = mailtoLink;
 }
