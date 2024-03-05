@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/styles/sideBarStyle.css">
+    
 </head>
 <body>
     <div class="wrapper">
@@ -28,14 +29,14 @@
             
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="/" class="sidebar-link">
+                    <a href="/" class="sidebar-link <%= currentPage === '/' ? 'active' : '' %>">
                         <i class="lni lni-home"></i>
                         <span>דף הבית</span>
                     </a>
                 </li>
                 
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    <a href="#" class="sidebar-link collapsed has-dropdown <%= currentPage === 'whereGetMort' ? 'active' : '' %>" data-bs-toggle="collapse"
                         data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="bi bi-bank"></i>
                         <span>מעוניין לקחת משכנתא חדשה</span>
@@ -43,7 +44,7 @@
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
                             <div class="indent">   
-                            <a href="#" class="sidebar-link">
+                            <a href="whereGetMort" class="sidebar-link <%= currentPage === 'whereGetMort' ? 'active' : '' %>">
                                 <i class="lni lni-calculator-alt"></i>
                                 <span>איפה כדאי לקחת הלוואה</span>
                             </a>
@@ -52,7 +53,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                    <a href="#" class="sidebar-link collapsed has-dropdown <%= currentPage === 'takemortgage' ? 'active' : '' %>" data-bs-toggle="collapse"
                        data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
                         <i class="bi bi-credit-card"></i>
                         <span>מעוניין לקחת הלוואה רגילה</span>
@@ -60,7 +61,7 @@
 
                     <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
+                            <a href="#" class="sidebar-link collapsed <%= currentPage === 'takemortgage' ? 'active' : '' %>" data-bs-toggle="collapse"
                              data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
                              <div class="indentless">
                              <i class="bi bi-coin"></i>
@@ -71,19 +72,27 @@
                             <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
                                     <div class="indent">
-                                    <a href="takemortgage" class="sidebar-link">
+                                    <a href="takemortgage" class="sidebar-link <%= currentPage === 'takemortgage' ? 'active' : '' %>">
                                     <i class="fa fa-money"></i>
                                     <span>מעוניין לקחת הלוואה אחת</span>
-                                    </a>   
+                                    </a>
+                                    <i class="bi bi-info-circle tooltip-icon">
+                                        <span class="tooltiptext">אומדן בלבד. פרטי ההלוואה הסופיים הם הקובעים</span>
+                                    </i>    
                                     </div>                               
                                 </li>
                                 <li class="sidebar-item">
+                                    
                                     <div class="indent">
                                     <a href="#" class="sidebar-link">
                                     <i class="bi bi-cash-coin"></i>
-                                    <span>מעוניין לקחת כמה הלוואות</span>
+                                    <span>מעוניין לקחת כמה הלוואות</span>                            
                                     </a>
+                                    <i class="bi bi-info-circle tooltip-icon">
+                                        <span class="tooltiptext">אומדן בלבד. פרטי ההלוואה הסופיים הם הקובעים</span>
+                                    </i>
                                     </div>
+                                    
                                 </li>
                             </ul>
                                 <li class="sidebar-item">
@@ -156,7 +165,7 @@
                     <% } %>
             </li>
         </aside>
-
+         
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/scripts/sideBarLayOut.js"></script>
 </body>

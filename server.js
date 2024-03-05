@@ -114,10 +114,12 @@ app.get('/', function (req, res) {
   if (req.session.userId) {
     db.getFname(req.session.userId, function (err, row) {
       templateData.firstname = row.firstname;
+      templateData.currentPage = '/';
       renderTemplate(templatePath, templateData, res);
     });
   } else {
     templateData.firstname = "אורח";
+    templateData.currentPage = '/';
     renderTemplate(templatePath, templateData, res);
   }
 });
@@ -130,13 +132,39 @@ app.get('/takemortgage', function (req, res) {
   if (req.session.userId) {
     db.getFname(req.session.userId, function (err, row) {
       templateData.firstname = row.firstname;
+      templateData.currentPage = 'takemortgage';
       renderTemplate(templatePath, templateData, res);
     });
   } else {
     templateData.firstname = "אורח";
+    templateData.currentPage = 'takemortgage';
     renderTemplate(templatePath, templateData, res);
   }
 });
+
+//where should i get a mortgage page
+app.get('/whereGetMort', function (req, res) {
+  let templatePath = path.join(__dirname, 'views', 'whereGetMort.ejs');
+  let templateData = {};
+
+  if (req.session.userId) {
+    db.getFname(req.session.userId, function (err, row) {
+      if (err) {
+        res.status(500).send('Error retrieving user data');
+      } else {
+        templateData.firstname = row.firstname;
+        templateData.currentPage = 'whereGetMort'; // Pass the currentPage variable
+        renderTemplate(templatePath, templateData, res);
+      }
+    });
+  } else {
+    templateData.firstname = "אורח";
+    templateData.currentPage = 'whereGetMort'; // Pass the currentPage variable
+    renderTemplate(templatePath, templateData, res);
+  }
+});
+
+
 
 function renderTemplate(templatePath, templateData, res) {
   ejs.renderFile(templatePath, templateData, function (err, renderedHtml) {
