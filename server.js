@@ -138,7 +138,7 @@ app.get('/', function (req, res) {
   renderTemplate(req, res, 'index');
 });
 
-// takemortgage page
+// where should i get a one loan page
 app.get('/takemortgage', function (req, res) {
   renderTemplate(req, res, 'takemortgage');
 });
@@ -146,6 +146,17 @@ app.get('/takemortgage', function (req, res) {
 // where should i get a mortgage page
 app.get('/whereGetMort', function (req, res) {
   renderTemplate(req, res, 'whereGetMort', { success: "no result" });
+});
+
+
+// where should i get a fewloans page
+app.get('/takefewloans', function (req, res) {
+  renderTemplate(req, res, 'takefewloans', { success: "no result" });
+});
+
+// where should i get a bigloan page
+app.get('/takebigloan', function (req, res) {
+  renderTemplate(req, res, 'takebigloan', { success: "no result" });
 });
 
 // Contact page
