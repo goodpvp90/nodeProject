@@ -26,7 +26,7 @@ function restorePassword(email, password) {
 }
 
 
-function contactForm(fname,lname, phone, email, selection, subject ) {
+function contactForm(fname, lname, phone, email, selection, subject, callback) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -39,15 +39,16 @@ function contactForm(fname,lname, phone, email, selection, subject ) {
         from: 'MashcantaRestore@gmail.com',
         to: `calc.task@gmail.com`,
         subject: `${selection}`,
-        text: `${fname} ${lname},Contacting us regarding subject: ${subject}, costumer email to reply : ${email}
-        costumer phone : ${phone}`
+        text: `${fname} ${lname}, Contacting us regarding subject: ${subject}, customer email to reply: ${email}, customer phone: ${phone}`
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-            console.log(error);
+            console.error(error);
+            callback(error); // Pass the error to the callback
         } else {
             console.log('Email sent: ' + info.response);
+            callback(null); // Pass null for error to the callback
         }
     });
 }

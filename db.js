@@ -29,7 +29,18 @@ function createUsersTable() {
         }
     });
 }*/
-
+/* Function to create mortgage requests table
+function requestsTable() {
+    db.run(`CREATE TABLE mortgage_requests (
+        request_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        purpose TEXT NOT NULL,
+        bank TEXT NOT NULL,
+        loan_amount INTEGER NOT NULL,
+        citizenship TEXT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(user_id))`
+    );
+}*/
 
 // Function to insert a new user into the database
 function createUser(firstname, lastname, email, phone, password, callback) {
@@ -57,12 +68,18 @@ function resetPassword(newpass, email, callback) {
     db.get(`UPDATE users set password = ? WHERE email = ?`, [newpass, email], callback);
 }
 
+// Function to insert a new mortgage request into the database
+function submitMortgageRequest(id, purpose, bank, loanAmount, citizenship, callback) {
+    db.run(`INSERT INTO mortgage_requests (user_id, purpose, bank, loan_amount, citizenship) VALUES (?, ?, ?, ?, ?)`, [id, purpose, bank, loanAmount, citizenship], callback);
+}
+
 // Exporting functions to make them accessible from other files
 module.exports = {
     createUser,
     validateLogin,
     validateEmail,
     resetPassword,
+    submitMortgageRequest,
     getFname: getFname,
     closeConnection: () => db.close((err) => {
         if (err) {
