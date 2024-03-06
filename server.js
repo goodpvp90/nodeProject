@@ -7,7 +7,6 @@ const mailer = require('./mailer.js');
 const app = express();
 const ejs = require('ejs');
 
-
 const requireAuth = (req, res, next) => {
   if (req.session.userId) {
     next(); // User is authenticated, continue to next middleware
@@ -23,11 +22,8 @@ app.use(session({
   cookie: { secure: false }
 }));
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
-
 
 // Handle Reset Password form submission
 app.post('/newpass', function (req, res) {
@@ -110,12 +106,10 @@ app.post('/signup', function (req, res) {
       }
     } else {
       console.log("Registration successful");
-      res.redirect(`/signup/?show=true&email=${email}&password=${password}`);
+      res.redirect(`/signup?show=true&email=${email}&password=${password}`);
     }
   });
 });
-
-
 
 // Index page
 app.get('/', function (req, res) {
@@ -139,12 +133,18 @@ app.get('/contact', function (req, res) {
 
 // Login page
 app.get('/login', function (req, res) {
-  renderTemplate(req, res, 'login');
+  if (req.session.userId)
+    renderTemplate(req, res, 'index');
+  else
+    renderTemplate(req, res, 'login');
 });
 
 // Signup page
 app.get('/signup', function (req, res) {
-  renderTemplate(req, res, 'signup');
+  if (req.session.userId)
+    renderTemplate(req, res, 'index');
+  else
+    renderTemplate(req, res, 'signup');
 });
 
 // Newpass page
@@ -170,8 +170,6 @@ app.get('/logout', function (req, res) {
   }
   res.redirect('/');
 });
-
-
 
 // Function to render templates
 function renderTemplate(req, res, templateName, templateData = {}) {
@@ -204,7 +202,6 @@ function render(templatePath, templateData, res) {
     }
   });
 }
-
 
 // Close database connection when the server is shutting down
 process.on('SIGINT', () => {
