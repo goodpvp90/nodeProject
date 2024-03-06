@@ -6,7 +6,7 @@
     margin: 0;
     padding: 0;
     position: relative;
-    top:0.3rem;
+    top: 0.3rem;
 
 }
 
@@ -36,7 +36,10 @@ body {
     width: 100%;
     overflow: hidden;
     transition: all 0.35s ease-in-out;
-    background-color: #fafbfe;
+    /*background-color: #fafbfe;*/
+    background-image: url(/images/background.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 #sidebar {
@@ -76,7 +79,7 @@ body {
     font-size: 1.35rem;
     font-weight: 600;
     position: relative;
-    right:1.7rem;
+    right: 1.7rem;
 }
 
 #sidebar:not(.expand) .sidebar-logo,
@@ -147,30 +150,34 @@ a.sidebar-link:hover {
     transform: rotate(45deg);
     transition: all .2s ease-out;
 }
+
 .list-unstyled {
     padding-left: 0;
     list-style: none;
     padding-right: 0;
 }
-.indent i{
+
+.indent i {
     margin-right: 1.5rem;
 }
-.indentless i{
+
+.indentless i {
     margin-right: 0.7rem;
 }
 
 .sidebar-link.active {
     background-color: rgba(255, 255, 255, .075);
     border-left: 3px solid #3b7ddd;
-  }
+}
 
-  .tooltip-icon {
+.tooltip-icon {
     font-size: 1rem;
     color: #999999;
     position: absolute;
     right: 212px;
     bottom: 13.5px;
 }
+
 .tooltip-icon .tooltiptext {
     visibility: hidden;
     width: 120px;
@@ -179,12 +186,12 @@ a.sidebar-link:hover {
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
-  
+
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-  }
-  
-  .tooltip-icon:hover .tooltiptext {
+}
+
+.tooltip-icon:hover .tooltiptext {
     visibility: visible;
-  }
+}
