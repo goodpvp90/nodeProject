@@ -12,10 +12,11 @@
   <!-- Disability tool -->
   <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
   <script src="/scripts/accessTool.js" defer></script>
+  <link rel="icon" type="image/png" href="images/icon.png">
 </head>
 
 <body>
-
+  <%- include('sidebar') %>
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-6 col-lg-4">
       <form method="POST" action="/signup" onsubmit="return signUpForm()">
@@ -57,7 +58,7 @@
           <input id="confirm-password" type="password" class="form-control" placeholder="סיסמה חוזרת" required>
         </div>
         <button  type="submit" class="btn btn-primary btn-block">הירשם</button>
-        <p>קיים כבר משתמש? <a href="/log-in">התחברות</a></p>
+        <p>קיים כבר משתמש? <a href="/login">התחברות</a></p>
         <div id="validation"></div>
         <div id="rules"></div>
       </form>

@@ -9,6 +9,11 @@ body {
     background-size: cover;
 }
 
+/*.home-icon {
+    width: 100px;
+    height: 100px;
+}*/
+
 /* Media query to set a different background image for phones */
 /* @media only screen and (max-width: 900px) {
     body {

@@ -12,7 +12,7 @@ function loginForm(mail, pass) {
     //.test compares email field with regex.
     /*if (!emailRegex.test(mail)) {
         errors += '<p style="color:red;">Please enter a valid email address.</p>';
-        validate = '/log-in?error=it is not an email';
+        validate = '/login?error=it is not an email';
     }*/
 
     if (validate != true) {
