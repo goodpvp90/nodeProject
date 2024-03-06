@@ -17,7 +17,7 @@ function contactForm() {
     validate = false;
   }
 
-  if (!name.value) {
+  if (!fname.value) {
     errors += '<p style="color:red;">Enter a name</p>';
     name.focus();
     validate = false;

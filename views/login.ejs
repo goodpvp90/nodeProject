@@ -24,6 +24,9 @@
       <div class="col-md-6 col-lg-4">
         <form method="POST" action="/login">
           <h2 id="login-title whi">התחברות</h2>
+          <% if (typeof success !== 'undefined' && success === "nl") { %> 
+            <h3 style = "color:red">צריך להתחבר כדי לחשב משכנתא</h3>
+          <% } %>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-user"></i></span>

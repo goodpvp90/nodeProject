@@ -6,6 +6,7 @@ const session = require('express-session');
 const mailer = require('./mailer.js');
 const app = express();
 const ejs = require('ejs');
+const mortgageval = require('./server-scripts/wheretakemort.js');
 
 const requireAuth = (req, res, next) => {
   if (req.session.userId) {
@@ -58,21 +59,42 @@ app.post('/restore', function (req, res) {
   });
 });
 
-// Handle Contact form submission
+
 app.post('/contact', function (req, res) {
   const { fname, lname, phone, email, selection, subject } = req.body;
 
   // Send email
   mailer.contactForm(fname, lname, phone, email, selection, subject, function (err) {
     if (err) {
-      res.redirect('/contact?result=false');
+      renderTemplate(req, res, 'contact', { result: false });
     } else {
-      res.redirect('/contact?result=true');
+      renderTemplate(req, res, 'contact', { result: true });
     }
   });
 });
 
-// Handle login form submission
+// Handle mortgage form submission
+app.post('/wheregetmort', function (req, res) {
+  const { purpose, bank, loanAmount, citizenship } = req.body;
+  if (!req.session.userId)
+    renderTemplate(req, res, 'login', { success: "nl" });// nl - not logged
+  else {
+    db.submitMortgageRequest(req.session.userId, purpose, bank, loanAmount, citizenship, function (err) {
+      if (err) {
+        console.log(err);
+        // Handle error appropriately, e.g., render the mortgage form again with an error message
+        renderTemplate(req, res, 'wheregetmort', { error: 'An error occurred while processing your request' });
+      } else {
+        // Mortgage request submitted successfully
+        renderTemplate(req, res, 'wheregetmort', { success: true });
+      }
+    });
+  }
+});
+
+
+
+// Handle login form submission //#### TO DO , CHANGE IT TO EJS HANDLE!
 app.post('/login', function (req, res) {
   const { username, password } = req.body;
 
@@ -123,12 +145,12 @@ app.get('/takemortgage', function (req, res) {
 
 // where should i get a mortgage page
 app.get('/whereGetMort', function (req, res) {
-  renderTemplate(req, res, 'whereGetMort');
+  renderTemplate(req, res, 'whereGetMort', { success: "no result" });
 });
 
 // Contact page
 app.get('/contact', function (req, res) {
-  renderTemplate(req, res, 'contact');
+  renderTemplate(req, res, 'contact', { result: "no result" });
 });
 
 // Login page
@@ -147,20 +169,20 @@ app.get('/signup', function (req, res) {
     renderTemplate(req, res, 'signup');
 });
 
-// Newpass page
-app.get('/newpass', requireAuth, function (req, res) {
-  const filePath = path.join(__dirname, 'views', 'newpass.html');
-  res.sendFile(filePath);
+// Change Password page
+app.get('/newpass', function (req, res) {
+  if (req.session.userId)
+    renderTemplate(req, res, 'newpass');
+  else
+    renderTemplate(req, res, 'index');
 });
 
-// Restore page
+// Recover password page
 app.get('/restore', function (req, res) {
-  if (req.session.userId) {
-    res.redirect('/');
-  } else {
-    const filePath = path.join(__dirname, 'views', 'restore.html');
-    res.sendFile(filePath);
-  }
+  if (req.session.userId)
+    renderTemplate(req, res, 'index');
+  else
+    renderTemplate(req, res, 'restore');
 });
 
 // Logout
@@ -173,6 +195,7 @@ app.get('/logout', function (req, res) {
 
 // Function to render templates
 function renderTemplate(req, res, templateName, templateData = {}) {
+  console.log(templateData);
   let templatePath = path.join(__dirname, 'views', `${templateName}.ejs`);
   if (req.session.userId) {
     db.getFname(req.session.userId, function (err, row) {

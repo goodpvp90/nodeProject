@@ -15,6 +15,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="mb-4">
+                    <% if (result == false) { %> 
+                        <h1>הייתה שגיאה, נסה במועד מאוחר יותר</h1>
+                    <% } %>
+                    <% if (result == true) { %> 
+                        <h1>נשלח בהצלחה, ניצור קשר בהקדם!</h1>
+                    <% } %>
+                    <% if (result == "no result") { %>
                     <form method="POST" action="/contact" onsubmit="return contactForm()">
                         <h2>צור קשר</h2>
                         <input name="fname" id="fname" type="text" class="form-control mb-3" placeholder="שם פרטי*" required>
@@ -37,6 +44,7 @@
                         <div id="validation"></div>
                         <div id="rules"></div>
                     </form>
+                    <% } %>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
@@ -51,19 +59,6 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="/scripts/contact.js"></script>
-
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const result = urlParams.get("result");
-    const resultMessage = document.createElement("p");
-    resultMessage.classList.add("text-danger");
-    if(result === 'true'){
-        document.querySelector("form").appendChild(resultMessage);
-        resultMessage.textContent = `Contact sent, Thank you!`;  
-    }
-    document.querySelector("form").appendChild(resultMessage);
-    
-  </script>
 
 </body>
 </html>
