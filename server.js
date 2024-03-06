@@ -61,6 +61,13 @@ app.post('/restore', function (req, res) {
   });
 });
 
+// Handle Recover Password form submission
+app.post('/contact', function (req, res) {
+  const { fname,  lname, phone, email, selection, subject } = req.body;
+  mailer.contactForm(fname, lname, phone, email, selection, subject);
+  res.redirect(`/contact?result=true`)
+});
+
 // Handle login form submission
 app.post('/log-in', function (req, res) {
   const { username, password } = req.body;
@@ -107,10 +114,12 @@ app.get('/', function (req, res) {
   if (req.session.userId) {
     db.getFname(req.session.userId, function (err, row) {
       templateData.firstname = row.firstname;
+      templateData.currentPage = '/';
       renderTemplate(templatePath, templateData, res);
     });
   } else {
     templateData.firstname = "אורח";
+    templateData.currentPage = '/';
     renderTemplate(templatePath, templateData, res);
   }
 });
@@ -123,13 +132,39 @@ app.get('/takemortgage', function (req, res) {
   if (req.session.userId) {
     db.getFname(req.session.userId, function (err, row) {
       templateData.firstname = row.firstname;
+      templateData.currentPage = 'takemortgage';
       renderTemplate(templatePath, templateData, res);
     });
   } else {
     templateData.firstname = "אורח";
+    templateData.currentPage = 'takemortgage';
     renderTemplate(templatePath, templateData, res);
   }
 });
+
+//where should i get a mortgage page
+app.get('/whereGetMort', function (req, res) {
+  let templatePath = path.join(__dirname, 'views', 'whereGetMort.ejs');
+  let templateData = {};
+
+  if (req.session.userId) {
+    db.getFname(req.session.userId, function (err, row) {
+      if (err) {
+        res.status(500).send('Error retrieving user data');
+      } else {
+        templateData.firstname = row.firstname;
+        templateData.currentPage = 'whereGetMort'; // Pass the currentPage variable
+        renderTemplate(templatePath, templateData, res);
+      }
+    });
+  } else {
+    templateData.firstname = "אורח";
+    templateData.currentPage = 'whereGetMort'; // Pass the currentPage variable
+    renderTemplate(templatePath, templateData, res);
+  }
+});
+
+
 
 function renderTemplate(templatePath, templateData, res) {
   ejs.renderFile(templatePath, templateData, function (err, renderedHtml) {
@@ -158,6 +193,14 @@ app.get('/log-in', function (req, res) {
 app.get('/newpass', requireAuth, function (req, res) {
   // Construct the file path to the HTML file
   const filePath = path.join(__dirname, 'views/newpass.html');
+  // Send the HTML file as a response
+  res.sendFile(filePath);
+});
+
+// Index page
+app.get('/contact', function (req, res) {
+  // Construct the file path to the HTML file
+  const filePath = path.join(__dirname, 'views/contact.html');
   // Send the HTML file as a response
   res.sendFile(filePath);
 });
