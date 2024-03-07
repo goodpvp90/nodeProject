@@ -17,108 +17,136 @@
 
 <body>
   <%- include('sidebar') %>
-  <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="col-md-6 col-lg-4">
-      <form method="POST" action="/signup" onsubmit="return signUpForm()">
-        <h2 id="login-title">הרשמה</h2>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-user"></i></span>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+      <div class="col-md-6 col-lg-4">
+        <form method="POST" action="/signup" onsubmit="return signUpForm()">
+          <h2 id="login-title">הרשמה</h2>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input name="fname" id="firstname" type="text" class="form-control" placeholder="שם פרטי" required>
           </div>
-          <input name ="fname" id="firstname" type="text" class="form-control" placeholder="שם פרטי" required>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input name="lname" id="lname" type="text" class="form-control" placeholder="שם משפחה" required>
           </div>
-          <input name="lname" id="lname" type="text" class="form-control" placeholder="שם משפחה" required>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input name="email" id="email" type="text" class="form-control" placeholder="כתובת מייל" required>
           </div>
-          <input name="email" id="email" type="text" class="form-control" placeholder="כתובת מייל" required>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <p id="emailError" class="error"></p>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input name="phone" id="phone" type="text" class="form-control" placeholder="טלפון" required>
           </div>
-          <input name="phone" id="phone" type="text" class="form-control" placeholder="טלפון" required>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          <p id="phoneError" class="error"></p>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            </div>
+            <input name="password" id="password" type="password" class="form-control" placeholder="סיסמה" required>
           </div>
-          <input name="password" id="password" type="password" class="form-control" placeholder="סיסמה" required>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          <p id="passwordError" class="error"></p>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            </div>
+            <input id="confirm-password" type="password" class="form-control" placeholder="סיסמה חוזרת" required>
           </div>
-          <input id="confirm-password" type="password" class="form-control" placeholder="סיסמה חוזרת" required>
-        </div>
-        <button  type="submit" class="btn btn-primary btn-block">הירשם</button>
-        <p>קיים כבר משתמש? <a href="/login">התחברות</a></p>
-        <div id="validation"></div>
-        <div id="rules"></div>
-      </form>
+          <p id="confirmPasswordError" class="error"></p>
+          <button type="submit" class="btn btn-primary btn-block">הירשם</button>
+          <p>קיים כבר משתמש? <a href="/login">התחברות</a></p>
+          <div id="validation"></div>
+          <div id="rules"></div>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="signupModalLabel">פרטי התחברות</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p><strong>אי-מייל:</strong> <span id="modalEmail"></span></p>
-          <p><strong>סיסמה:</strong> <span id="modalPassword"></span></p>
-          <p class="text-success">החשבון נפתח בהצלחה!</p>
+    <!-- Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="signupModalLabel">פרטי התחברות</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><strong>אי-מייל:</strong> <span id="modalEmail"></span></p>
+            <p><strong>סיסמה:</strong> <span id="modalPassword"></span></p>
+            <p class="text-success">החשבון נפתח בהצלחה!</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!-- Popper JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/scripts/signup.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const show = urlParams.get("show");
+          const error = urlParams.get("error");
+          const errorMessage = document.createElement("p");
+          errorMessage.classList.add("text-danger");
+          const form = document.querySelector("form");
 
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const show = urlParams.get("show");
-    const error = urlParams.get("error");
-    const errorMessage = document.createElement("p");
-    errorMessage.classList.add("text-danger");
-    document.querySelector("form").appendChild(errorMessage);
-    if(show){
-      email = urlParams.get("email");
-      password = urlParams.get("password");
-      modalEmail = document.getElementById("modalEmail");
-      modalPassword = document.getElementById("modalPassword");
-      modalEmail.innerHTML = email;
-      modalPassword.innerHTML = password;
-      $('#signupModal').modal('show');
-    }
-    switch(error) {
+          if (!form) {
+            console.error("Form not found on the page.");
+            return;
+          }
+
+          form.appendChild(errorMessage);
+
+          if (show) {
+            email = urlParams.get("email");
+            password = urlParams.get("password");
+            modalEmail = document.getElementById("modalEmail");
+            modalPassword = document.getElementById("modalPassword");
+
+            if (modalEmail && modalPassword) {
+              modalEmail.innerHTML = email;
+              modalPassword.innerHTML = password;
+              $('#signupModal').modal('show');
+            } else {
+              console.error("Modal elements not found on the page.");
+            }
+          }
+
+          switch (error) {
             case 'Email already exists':
-              errorMessage.textContent = "Email already exists";  
+              errorMessage.textContent = "Email already exists";
               break;
             case 'Phone number already exists':
-              errorMessage.textContent = "Phone number already exists";  
+              errorMessage.textContent = "Phone number already exists";
               break;
-            default : 
-              document.querySelector("form").appendChild(errorMessage);
+            default:
+              form.appendChild(errorMessage);
           }
-  </script>
+
+          // Reset URL parameters after processing
+          window.history.replaceState({}, document.title, window.location.pathname);
+        } catch (error) {
+          console.error("Error in script:", error);
+        }
+      });
+    </script>
+
 
 
 </body>

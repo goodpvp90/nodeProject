@@ -23,6 +23,7 @@ app.use(session({
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // Handle Reset Password form submission
@@ -90,6 +91,7 @@ app.post('/login', function (req, res) {
 // Handle signup form submission
 app.post('/signup', function (req, res) {
   const { fname, lname, password, email, phone } = req.body;
+
 
   // Create user
   db.createUser(fname, lname, email, phone, password, function (err, _row) {
@@ -212,6 +214,6 @@ process.on('SIGINT', () => {
 });
 
 // Start the server on port 8080
-app.listen(3005, function () {
+app.listen(8080, function () {
   console.log('Server is running on http://localhost:8080');
 });
