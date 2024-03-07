@@ -181,11 +181,8 @@ app.get('/signup', function (req, res) {
 });
 
 // Change Password page
-app.get('/newpass', function (req, res) {
-  if (req.session.userId)
-    renderTemplate(req, res, 'newpass');
-  else
-    renderTemplate(req, res, 'index');
+app.get('/newpass', requireAuth, function (req, res) {
+  renderTemplate(req, res, 'newpass');
 });
 
 // Recover password page
