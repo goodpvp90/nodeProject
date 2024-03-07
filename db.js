@@ -8,6 +8,7 @@ const db = new sqlite3.Database('database.db', (err) => {
         console.log('Connected to the SQLite database.');
         // Create users table if it doesn't exist
         //createUsersTable();
+        //requetsTable();
     }
 });
 
