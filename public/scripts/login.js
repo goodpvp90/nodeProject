@@ -20,7 +20,7 @@
 //     return validate;
 // }
 // return true;
-
+//
 
 /// Attach an event listener to the email input field - update in real time
 document.getElementById("email").addEventListener("input", async function () {
