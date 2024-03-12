@@ -1,29 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    
-    <title>Login</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link rel="stylesheet" type="text/css" href="/styles/style.css" />
-    <!-- Disability tool -->
-    <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
-    <script src="/scripts/accessTool.js" defer></script>
-    <link rel="icon" type="image/png" href="images/icon.png">
-  </head>
 
-  <body>
-    <%- include('sidebar') %>
+<head>
+
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="/styles/style.css" />
+  <!-- Disability tool -->
+  <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
+  <script src="/scripts/accessTool.js" defer></script>
+  <link rel="icon" type="image/png" href="images/icon.png">
+</head>
+
+<body>
+  <%- include('sidebar') %>
     <div class="container d-flex justify-content-center align-items-center vh-100">
       <div class="col-md-6 col-lg-4">
         <form method="POST" action="/login">
           <h2 id="login-title whi">התחברות</h2>
+
           <% if (typeof success !== 'undefined' && success === "nl") { %> 
             <h3 style = "color:red">צריך להתחבר כדי לחשב משכנתא</h3>
           <% } %>
@@ -31,28 +27,17 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-user"></i></span>
             </div>
-            <input
-              id="email"
-              name="username"
-              type="text"
-              class="form-control"
-              placeholder="כתובת מייל"
-              required
-            />
+            <input id="email" name="username" type="text" class="form-control" placeholder="כתובת מייל" required />
           </div>
+          <p id="emailError" class="error"></p>
+
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-lock"></i></span>
             </div>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              class="form-control"
-              placeholder="סיסמה"
-              required
-            />
+            <input id="password" name="password" type="password" class="form-control" placeholder="סיסמה" required />
           </div>
+          <p id="passwordError" class="error"></p>
           <button type="submit" class="btn btn-primary btn-block">
             התחבר
           </button>
@@ -61,24 +46,43 @@
         </form>
 
         <script>
-          const urlParams = new URLSearchParams(window.location.search);
-          const error = urlParams.get("error");
-          const errorMessage = document.createElement("p");
-          errorMessage.classList.add("text-danger"); 
-          document.querySelector("form").appendChild(errorMessage);
-          switch(error) {
-            case 'it is not an email':
-              errorMessage.textContent = "type an email please";  
-              break;
-            case 'Incorrect email or password':
-              errorMessage.textContent = "Incorrect email or password";  
-              break;
-            default:
-              document.querySelector("form").appendChild(errorMessage);
-          }
-          
+          document.addEventListener("DOMContentLoaded", function () {
+            try {
+              const urlParams = new URLSearchParams(window.location.search);
+              const error = urlParams.get("error");
+              const errorMessage = document.createElement("p");
+              errorMessage.classList.add("text-danger");
+              const form = document.querySelector("form");
+
+              if (!form) {
+                console.error("Form not found on the page.");
+                return;
+              }
+
+              form.appendChild(errorMessage);
+
+              switch (error) {
+                case 'it is not an email':
+                  errorMessage.textContent = "Type an email, please.";
+                  break;
+                case 'Incorrect email or password':
+                  errorMessage.textContent = "Incorrect email or password.";
+                  break;
+                default:
+                  form.appendChild(errorMessage);
+              }
+
+              // Reset URL parameters after processing
+              window.history.replaceState({}, document.title, window.location.pathname);
+            } catch (error) {
+              console.error("Error in script:", error);
+            }
+          });
         </script>
+
+        <script src="/scripts/login.js"></script>
       </div>
     </div>
-  </body>
+</body>
+
 </html>

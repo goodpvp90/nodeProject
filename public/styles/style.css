@@ -9,6 +9,21 @@ body {
     background-size: cover;
 }
 
+.error {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 0.2em;
+    display: block;
+}
+
+.success {
+    color: green;
+    font-size: 0.8em;
+    margin-top: 0.2em;
+    display: block;
+
+}
+
 /*.home-icon {
     width: 100px;
     height: 100px;
