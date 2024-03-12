@@ -8,7 +8,7 @@ const db = new sqlite3.Database('database.db', (err) => {
         console.log('Connected to the SQLite database.');
         // Create users table if it doesn't exist
         //createUsersTable();
-        //requetsTable();
+        //requestsTable();
     }
 });
 
@@ -30,7 +30,7 @@ function createUsersTable() {
         }
     });
 }*/
-/* Function to create mortgage requests table
+//Function to create mortgage requests table
 function requestsTable() {
     db.run(`CREATE TABLE mortgage_requests (
         request_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -41,7 +41,7 @@ function requestsTable() {
         citizenship TEXT NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(user_id))`
     );
-}*/
+}
 
 // Function to insert a new user into the database
 function createUser(firstname, lastname, email, phone, password, callback) {
