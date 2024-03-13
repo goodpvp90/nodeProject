@@ -1,76 +1,64 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>הלוואה לרכישת נדל"ן</title>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="/styles/style.css" />
-  <!-- Disability tool -->
-  <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
-  <script src="/scripts/accessTool.js" defer></script>
-  <link rel="icon" type="image/png" href="images/icon.png">
+    <title>צור קשר</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <script src="/scripts/accessTool.js" defer></script>
 </head>
-
 <body>
-  <%- include('sidebar') %>
-
-  <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="col-md-6 col-lg-4">
-        <% if (typeof success !== 'undefined' && success == true) { %> 
-            <h1>נשלח בהצלחה, ניצור קשר בהקדם!</h1>
-          <% } %>
-          <% if (typeof success !== 'undefined' && success === "nl") { %> 
-            <h1>מצטערים, חייב להתחבר כדי לקבל תוצאה</h1>
-          <% } %>
-          <% if (typeof error !== 'undefined' && error) { %> 
-            <h1>שגיאה בקליטת הנתונים!</h1>
-          <% } %>
-          <% if (typeof success !== 'undefined' && success === "no result") { %> 
-      <form method="POST" action="whereGetMort" onsubmit="return mortgageForm()">
-        <h2 id="mortgage-title">הגשת בקשה להלוואה לרכישת נדל"ן</h2>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-file-signature"></i></span>
-          </div>
-          <input name="purpose" id="purpose" type="text" class="form-control" placeholder="מטרת ההלוואה" required>
+    <%- include('sidebar') %>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mb-4">
+                    <% if (result == false) { %> 
+                        <h1>הייתה שגיאה, נסה במועד מאוחר יותר</h1>
+                    <% } %>
+                    <% if (result == true) { %> 
+                        <h1>נשלח בהצלחה, ניצור קשר בהקדם!</h1>
+                    <% } %>
+                    <% if (result == "no result") { %>
+                    <form method="POST" action="/takebigloan" onsubmit="return contactForm()">
+                        <h2>צור קשר</h2>
+                        <input name="fname" id="fname" type="text" class="form-control mb-3" placeholder="שם פרטי*" required>
+                        <input name="lname" id="lname" type="text" class="form-control mb-3" placeholder="שם משפחה*" required>
+                        <input name="phone" id="phone" type="text" class="form-control mb-3" placeholder="טלפון*" required>
+                        <input name="email" id="email" type="text" class="form-control mb-3" placeholder="אימייל*" required>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="choose"><i class="fas fa-info-circle"></i></label>
+                            </div>
+                            <select name="selection" class="custom-select" required>
+                                <option value="" disabled selected>בחר אפשרות*</option>
+                                <option value="Option1">אפשרות 1</option>
+                                <option value="Option2">אפשרות 2</option>
+                                <option value="Option3">אפשרות 3</option>
+                            </select>
+                        </div>
+                        <textarea name="subject" id="subject" class="form-control mb-3" placeholder="נושא*"></textarea>
+                        <button id="login-btn" type="submit" class="btn btn-primary btn-block">שלח</button>
+                        <div id="validation"></div>
+                        <div id="rules"></div>
+                    </form>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+            </div>
         </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-university"></i></span>
-          </div>
-          <input name="bank" id="bank" type="text" class="form-control" placeholder="שם הבנק שבו יש לך חשבון" required>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">₪</span>
-          </div>
-          <input name="loanAmount" id="loanAmount" type="number" min="0" max="1000000" step="10000" class="form-control" placeholder="סכום ההלוואה המבוקש (עד ₪1,000,000)" required>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-flag"></i></span>
-          </div>
-          <input name="citizenship" id="citizenship" type="text" class="form-control" placeholder="אזרחות נוכחית" required>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">שלח בקשה</button>
-      </form>
-      <% } %>
     </div>
-  </div>
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!-- Popper JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/scripts/contact.js"></script>
 
-  <script>
-    // You can add any custom JavaScript logic here if needed
-  </script>
 </body>
-
 </html>

@@ -9,6 +9,7 @@ const db = new sqlite3.Database('database.db', (err) => {
         // Create users table if it doesn't exist
         //createUsersTable();
         //requestsTable();
+        //nloan_requestsTable();
     }
 });
 
@@ -29,7 +30,7 @@ function createUsersTable() {
             console.log('Users table created successfully.');
         }
     });
-}*/
+}*//*
 //Function to create mortgage requests table
 function requestsTable() {
     db.run(`CREATE TABLE mortgage_requests (
@@ -41,7 +42,19 @@ function requestsTable() {
         citizenship TEXT NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(user_id))`
     );
-}
+}*/
+/*
+function nloan_requestsTable() {
+    db.run(`CREATE TABLE nloan_requestsTable (
+        request_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        rtmethod TEXT NOT NULL,
+        bank TEXT NOT NULL,
+        loan_amount INTEGER NOT NULL,
+        citizenship TEXT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(user_id))`
+    );
+}*/
 
 // Function to insert a new user into the database
 function createUser(firstname, lastname, email, phone, password, callback) {
@@ -74,6 +87,11 @@ function submitMortgageRequest(id, purpose, bank, loanAmount, citizenship, callb
     db.run(`INSERT INTO mortgage_requests (user_id, purpose, bank, loan_amount, citizenship) VALUES (?, ?, ?, ?, ?)`, [id, purpose, bank, loanAmount, citizenship], callback);
 }
 
+// Function to insert a new mortgage request into the database
+function submitnloaneRequest(id, rtmethod, bank, loanAmount, citizenship, callback) {
+    db.run(`INSERT INTO nloan_requestsTable (user_id, rtmethod, bank, loan_amount, citizenship) VALUES (?, ?, ?, ?, ?)`, [id, rtmethod, bank, loanAmount, citizenship], callback);
+}
+
 // Exporting functions to make them accessible from other files
 module.exports = {
     createUser,
@@ -82,6 +100,7 @@ module.exports = {
     resetPassword,
     submitMortgageRequest,
     getFname: getFname,
+    submitnloaneRequest: submitnloaneRequest,
     closeConnection: () => db.close((err) => {
         if (err) {
             console.error('Error closing database connection:', err.message);

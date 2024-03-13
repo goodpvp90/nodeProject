@@ -74,6 +74,20 @@ app.post('/contact', function (req, res) {
   });
 });
 
+app.post('/takebigloan', function (req, res) {
+  const { fname, lname, phone, email, selection, subject } = req.body;
+
+  // Send email
+  mailer.contactForm(fname, lname, phone, email, selection, subject, function (err) {
+    if (err) {
+      renderTemplate(req, res, 'takebigloan', { result: false });
+    } else {
+      renderTemplate(req, res, 'takebigloan', { result: true });
+    }
+  });
+});
+
+
 // Handle mortgage form submission
 app.post('/wheregetmort', function (req, res) {
   const { purpose, bank, loanAmount, citizenship } = req.body;
@@ -88,6 +102,25 @@ app.post('/wheregetmort', function (req, res) {
       } else {
         // Mortgage request submitted successfully
         renderTemplate(req, res, 'wheregetmort', { success: true });
+      }
+    });
+  }
+});
+
+// Handle mortgage form submission
+app.post('/takemortgage', function (req, res) {
+  const { rtmethod, bank, loanAmount, citizenship } = req.body;
+  if (!req.session.userId)
+    renderTemplate(req, res, 'login', { success: "nl" });// nl - not logged
+  else {
+    db.submitnloaneRequest(req.session.userId, rtmethod, bank, loanAmount, citizenship, function (err) {
+      if (err) {
+        console.log(err);
+        // Handle error appropriately, e.g., render the mortgage form again with an error message
+        renderTemplate(req, res, 'takemortgage', { error: 'An error occurred while processing your request' });
+      } else {
+        // Mortgage request submitted successfully
+        renderTemplate(req, res, 'takemortgage', { success: true });
       }
     });
   }
@@ -142,7 +175,7 @@ app.get('/', function (req, res) {
 
 // where should i get a one loan page
 app.get('/takemortgage', function (req, res) {
-  renderTemplate(req, res, 'takemortgage');
+  renderTemplate(req, res, 'takemortgage', { success: "no result" });
 });
 
 // where should i get a mortgage page
@@ -158,7 +191,7 @@ app.get('/takefewloans', function (req, res) {
 
 // where should i get a bigloan page
 app.get('/takebigloan', function (req, res) {
-  renderTemplate(req, res, 'takebigloan', { success: "no result" });
+  renderTemplate(req, res, 'takebigloan', { result: "no result" });
 });
 
 // Contact page
@@ -245,6 +278,6 @@ process.on('SIGINT', () => {
 });
 
 // Start the server on port 8080
-app.listen(8080, function () {
+app.listen(3005, function () {
   console.log('Server is running on http://localhost:8080');
 });
