@@ -18,44 +18,7 @@ document.getElementById("email").addEventListener("input", async function () {
     }
 });
 
-// Attach an event listener to the password input field- update in real time
-document.getElementById("password").addEventListener("input", function () {
-    // Validate password whenever the input changes
-    const password = this.value;
-    const passwordValidationResult = validatePassword(password);
-    const passwordError = document.getElementById("passwordError");
-    passwordError.innerText = passwordValidationResult;
 
-    // Handle the class based on validation result
-    if (passwordError.innerText === "נראה טוב!") {
-        passwordError.classList.remove("error");
-        passwordError.classList.add("success");
-    } else {
-        passwordError.classList.remove("success");
-        passwordError.classList.add("error");
-    }
-});
-
-// Attach an event listener to the confirm password input field- update in real time
-document.getElementById("confirm-password").addEventListener("input", function () {
-    // Get the values of password and confirm password
-    const password = document.getElementById("password").value;
-    const confirmPassword = this.value;
-
-    // Validate confirm password whenever the input changes
-    const confirmPasswordValidationResult = validateConfirmPassword(password, confirmPassword);
-    const confirmPasswordError = document.getElementById("confirmPasswordError");
-    confirmPasswordError.innerText = confirmPasswordValidationResult;
-
-    // Handle the class based on validation result
-    if (confirmPasswordError.innerText === "נראה טוב!") {
-        confirmPasswordError.classList.remove("error");
-        confirmPasswordError.classList.add("success");
-    } else {
-        confirmPasswordError.classList.remove("success");
-        confirmPasswordError.classList.add("error");
-    }
-})
 
 // Attach an event listener to the phone number input field - update in real time
 document.getElementById("phone").addEventListener("input", function () {
@@ -83,46 +46,7 @@ function validateEmail(email) {
     return "נראה טוב!";
 }
 
-function validatePassword(password) {
-    // Minimum 6 characters
-    if (password.length < 6) {
-        return "הססמא חייבת להיות באורך 6 לפחות";
-    }
 
-    // Must include an Uppercase character
-    else if (!/[A-Z]/.test(password)) {
-        return "הססמא חייבת להכיל אות גדולה";
-    }
-
-    // Must include a Lowercase character
-    else if (!/[a-z]/.test(password)) {
-        return "הססמא חייבת להכיל אות קטנה";
-    }
-
-    // Must include a Number
-    else if (!/\d/.test(password)) {
-        return "הססמא חייבת להכיל מספר";
-    }
-
-    // Must include at least one Special Character
-    else if (!/[!@#$%^&*()_+=\[{\]};:<>|./?,-]/.test(password)) {
-        return "הססמא חייבת להכיל סימן";
-    }
-
-    // Password meets all criteria
-    else {
-        return "נראה טוב!";
-    }
-}
-
-function validateConfirmPassword(password, confirmPassword) {
-    // Check if password and confirm password match
-    if (password !== confirmPassword) {
-        return "ססמאות לא תואמות";
-    } else {
-        return "נראה טוב!";
-    }
-}
 
 function validatePhoneNumber(phoneNumber) {
     // Check if the cleaned phone number matches the desired pattern

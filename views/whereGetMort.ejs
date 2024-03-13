@@ -12,6 +12,17 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
   <script src="/scripts/accessTool.js" defer></script>
   <link rel="icon" type="image/png" href="images/icon.png">
+  <style>
+    /* Blue background for the first row */
+    .table-custom tr:first-child {
+            background-color: #3b7ddd;
+        }
+
+    /* Green text for the third column in the first row */
+    .table-custom tr:first-of-type td:nth-of-type(4) {
+        color: green;
+    }
+</style>
 </head>
 
 <body>
@@ -20,7 +31,37 @@
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-6 col-lg-4">
         <% if (typeof success !== 'undefined' && success == true) { %> 
-            <h1>נשלח בהצלחה, ניצור קשר בהקדם!</h1>
+          <h4>הכי כדאי מבחינת עמלות - <div style="color:green">אופצייה ג' בנק לאומי</div</h4>
+          <table class="table table-bordered table-striped table-custom">
+            <tr>
+                <td></td>
+                <td>אופציה א</td>
+                <td>אופציה ב</td>
+                <td>אופציה ג</td>
+                <td>אופציה ד</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>בנק הפועלים</td>
+                <td>בנק מזרחי</td>
+                <td>בנק לאומי</td>
+                <td>בנק אגוד</td>
+            </tr>
+            <tr>
+              <td>עמלת פקיד</td>
+              <td>1.2%</td>
+              <td>5.6%</td>
+              <td>1%</td>
+              <td>7%</td>
+          </tr>
+          <tr>
+            <td>עמלת פעולה</td>
+            <td>0%</td>
+            <td>84 ש"ח לשנה</td>
+            <td>0%</td>
+            <td>0.24% בשנה</td>
+        </tr>
+        </table>
           <% } %>
           <% if (typeof success !== 'undefined' && success === "nl") { %> 
             <h1>מצטערים, חייב להתחבר כדי לקבל תוצאה</h1>
@@ -47,7 +88,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">₪</span>
           </div>
-          <input name="loanAmount" id="loanAmount" type="number" min="0" max="1000000" step="10000" class="form-control" placeholder="סכום ההלוואה המבוקש (עד ₪1,000,000)" required>
+          <input name="loanAmount" id="loanAmount" type="number" min="0" max="1000000" class="form-control" placeholder="סכום ההלוואה המבוקש (עד ₪1,000,000)" required>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -55,6 +96,13 @@
           </div>
           <input name="citizenship" id="citizenship" type="text" class="form-control" placeholder="אזרחות נוכחית" required>
         </div>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" name="termsAgreement" id="termsAgreementYes" value="yes" required>
+          <label class="form-check-label" for="termsAgreementYes">
+            כן, קראתי והסכמתי לתנאי השירות
+          </label>
+        </div>
+        <a href="/pdf/terms.pdf" target="_blank">תנאי השירות</a>
         <button type="submit" class="btn btn-primary btn-block">שלח בקשה</button>
       </form>
       <% } %>
