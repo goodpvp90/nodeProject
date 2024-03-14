@@ -12,6 +12,11 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
   <script src="/scripts/accessTool.js" defer></script>
   <link rel="icon" type="image/png" href="images/icon.png">
+  <style>
+    td {
+    padding: 20px; /* Adjust this value to set the desired padding between columns */
+  }
+  </style>
 </head>
 
 <body>
@@ -22,19 +27,19 @@
         <% if (typeof success !== 'undefined' && success == true) { %>
           <table>
             <tr>
-              <td>Column 1</td>
-              <td>Column 2</td>
-              <td>Column 3</td>
-              <td>Column 4</td>
+              <td>יש ליצור קשר עם הבנק {שם הבית להכניס לכאן}</td>
+              <td>נא לספק ת.ז, פרטי חשבון בנק, פרטים נוספים לפי הצורך</td>
+              <td>יש לשלוח 3 משכורות אחרונות</td>
+              <td>הכסף מתקבל בחשבון</td>
             </tr>
             <tr>
-              <td colspan="4"><img src="/images/arrow.png" style="width: 500px;" alt="Image"></td>
+              <td colspan="4"><img src="/images/arrow.png" style="width: 100%;" alt="Image"></td>
             </tr>
             <tr>
-              <td>Column 1</td>
-              <td>Column 2</td>
-              <td>Column 3</td>
-              <td>Column 4</td>
+              <td  colspan="4">מחפש נותן שירות או צריך עזרה בתהליך? <a href="/contact">פנה אלינו</a></td>
+            </tr>
+            <tr>
+              <td  colspan="4"><p><b>עלויות משוערות:</b></p><p>פתיחת תיק : 1000 ש"ח</p><p>עמלת ביצוע פעולה : 0.1%</p></td>
             </tr>
           </table>
           <% } %>

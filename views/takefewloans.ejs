@@ -16,48 +16,28 @@
 
 <body>
   <%- include('sidebar') %>
-
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-6 col-lg-4">
-        <% if (typeof success !== 'undefined' && success == true) { %> 
-            <h1>נשלח בהצלחה, ניצור קשר בהקדם!</h1>
-          <% } %>
-          <% if (typeof success !== 'undefined' && success === "nl") { %> 
-            <h1>מצטערים, חייב להתחבר כדי לקבל תוצאה</h1>
-          <% } %>
-          <% if (typeof error !== 'undefined' && error) { %> 
-            <h1>שגיאה בקליטת הנתונים!</h1>
-          <% } %>
-          <% if (typeof success !== 'undefined' && success === "no result") { %> 
-      <form method="POST" action="whereGetMort" onsubmit="return mortgageForm()">
-        <h2 id="mortgage-title">הגשת בקשה לכמה הלוואות</h2>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-file-signature"></i></span>
-          </div>
-          <input name="purpose" id="purpose" type="text" class="form-control" placeholder="מטרת ההלוואה" required>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-university"></i></span>
-          </div>
-          <input name="bank" id="bank" type="text" class="form-control" placeholder="שם הבנק שבו יש לך חשבון" required>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">₪</span>
-          </div>
-          <input name="loanAmount" id="loanAmount" type="number" min="0" max="1000000" step="10000" class="form-control" placeholder="סכום ההלוואה המבוקש (עד ₪1,000,000)" required>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-flag"></i></span>
-          </div>
-          <input name="citizenship" id="citizenship" type="text" class="form-control" placeholder="אזרחות נוכחית" required>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">שלח בקשה</button>
-      </form>
-      <% } %>
+      <h1 style="color:green">אני רוצה לקחת כמה הלוואות</h1>
+      <hr>
+      <h5 style="color:red">אין לך אפשרות לקחת כמה הלוואות עבור סכום הקטן מ100 אלף ש"ח</h5>
+          <table>
+            <tr>
+              <td>הגשת בקשה פרטנית בבנק</td>
+              <td>הבנק בודק את הבקשה</td>
+              <td>החלטה של הבנק האם לאשר הלוואה פרטנית</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="4"><img src="/images/arrow.png" style="width: 100%;" alt="Image"></td>
+            </tr>
+            <tr>
+              <td  colspan="4">מחפש נותן שירות או צריך עזרה בתהליך? <a href="/contact">פנה אלינו</a></td>
+            </tr>
+            <tr>
+              <td  colspan="4"><p><b>עלויות משוערות:</b></p><p>פתיחת תיק בקשה פרטנית : 500 ש"ח</p></td>
+            </tr>
+          </table>
     </div>
   </div>
 
