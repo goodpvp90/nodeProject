@@ -14,7 +14,7 @@ document.head.appendChild(accessibilityScript);
 
 // Configuration for accessibility_pro.js
 var accessibility_rtl = true;
-var pixel_from_side = 20;
-var pixel_from_start = 20;
+var pixel_from_side = 300;
+var pixel_from_start = 300;
 
 // Your additional code for accessTool.js goes here
