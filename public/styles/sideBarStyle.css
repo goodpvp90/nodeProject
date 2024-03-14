@@ -24,7 +24,7 @@ h1 {
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Noto Sans Hebrew';
 }
 
 .wrapper {
@@ -37,7 +37,7 @@ body {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     /*background-color: #fafbfe;*/
-    background-image: url(/images/background.jpg);
+    background-image: url(/images/professional-background.jpg);
     background-position: center;
     background-size: cover;
 }
