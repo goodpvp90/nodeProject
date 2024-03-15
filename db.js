@@ -59,7 +59,6 @@ function nloan_requestsTable() {
 // Function to insert a new user into the database
 function createUser(firstname, lastname, email, phone, password, callback) {
     db.run(`INSERT INTO users (firstname, lastname, email, password, phone_number) VALUES (?, ?, ?, ?, ?)`, [firstname, lastname, email, password, phone], callback);
-
 }
 
 // Function to validate login credentials
@@ -101,12 +100,13 @@ module.exports = {
     submitMortgageRequest,
     getFname: getFname,
     submitnloaneRequest: submitnloaneRequest,
-    closeConnection: () => db.close((err) => {
+    closeConnection: (callback) => db.close((err) => {
         if (err) {
             console.error('Error closing database connection:', err.message);
         } else {
             console.log('Closed the database connection.');
         }
+        callback();
     })
 };
 
