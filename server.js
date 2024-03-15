@@ -179,8 +179,8 @@ app.get('/takemortgage', function (req, res) {
 });
 
 // where should i get a mortgage page
-app.get('/whereGetMort', function (req, res) {
-  renderTemplate(req, res, 'whereGetMort', { success: "no result" });
+app.get('/wheregetmort', function (req, res) {
+  renderTemplate(req, res, 'wheregetmort', { success: "no result" });
 });
 
 
