@@ -100,12 +100,13 @@ module.exports = {
     submitMortgageRequest,
     getFname: getFname,
     submitnloaneRequest: submitnloaneRequest,
-    closeConnection: () => db.close((err) => {
+    closeConnection: (callback) => db.close((err) => {
         if (err) {
             console.error('Error closing database connection:', err.message);
         } else {
             console.log('Closed the database connection.');
         }
+        callback();
     })
 };
 
