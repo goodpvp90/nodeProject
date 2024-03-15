@@ -59,7 +59,6 @@ function nloan_requestsTable() {
 // Function to insert a new user into the database
 function createUser(firstname, lastname, email, phone, password, callback) {
     db.run(`INSERT INTO users (firstname, lastname, email, password, phone_number) VALUES (?, ?, ?, ?, ?)`, [firstname, lastname, email, password, phone], callback);
-
 }
 
 // Function to validate login credentials
