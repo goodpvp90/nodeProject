@@ -91,8 +91,10 @@ app.post('/takebigloan', function (req, res) {
 // Handle mortgage form submission
 app.post('/wheregetmort', function (req, res) {
   const { purpose, bank, loanAmount, citizenship } = req.body;
-  if (!req.session.userId)
+  if (!req.session.userId) {
+    req.session.loginRedirect = '/wheregetmort';
     renderTemplate(req, res, 'login', { success: "nl" });// nl - not logged
+  }
   else {
     db.submitMortgageRequest(req.session.userId, purpose, bank, loanAmount, citizenship, function (err) {
       if (err) {
@@ -138,7 +140,11 @@ app.post('/login', function (req, res) {
       res.redirect('/login?error=Incorrect email or password');
     } else {
       req.session.userId = username;
-      res.redirect('/');
+      if (req.session.loginRedirect) {
+        res.redirect(req.session.loginRedirect);
+      } else {
+        res.redirect('/');
+      }
     }
   });
 });
@@ -209,14 +215,6 @@ app.get('/login', function (req, res) {
 
 // Signup page
 app.get('/signup', function (req, res) {
-  if (req.session.userId)
-    renderTemplate(req, res, 'index');
-  else
-    renderTemplate(req, res, 'signup');
-});
-
-// Signup page
-app.get('/testsign', function (req, res) {
   if (req.session.userId)
     renderTemplate(req, res, 'index');
   else
