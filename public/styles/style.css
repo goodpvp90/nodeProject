@@ -98,3 +98,31 @@ body {
         font-size: 0.9rem;
     }
 }
+/* Style for contact US page */
+.container .btn-custom{
+    background-color: #0e2238;
+    color:white ;
+    transition: 0.2s;
+}
+.container .btn-custom:hover {
+    background-color: #173c62;
+    color:white ;
+ }
+
+ .container .form-control{
+    opacity: 85%;
+ }
+
+ .container .titleCard{
+    background-color: #203f61;
+    color:white ;  
+    height: 50px;
+    margin-bottom: 15px;
+    
+ }
+
+.custom-select{
+    background-position: left;
+    padding-right: 0.65rem;
+    opacity: 85%;
+}
