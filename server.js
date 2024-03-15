@@ -215,6 +215,14 @@ app.get('/signup', function (req, res) {
     renderTemplate(req, res, 'signup');
 });
 
+// Signup page
+app.get('/testsign', function (req, res) {
+  if (req.session.userId)
+    renderTemplate(req, res, 'index');
+  else
+    renderTemplate(req, res, 'signup');
+});
+
 // Change Password page
 app.get('/newpass', requireAuth, function (req, res) {
   renderTemplate(req, res, 'newpass');
