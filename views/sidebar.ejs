@@ -34,8 +34,8 @@
                 </li>
                 
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown <%= currentPage === 'wheregetmort' ? 'active' : '' %>" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                    <a href="#" class="sidebar-link collapsed has-dropdown <%= currentPage === 'wheregetmort' ? 'active' : '' %>"
+                         data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="bi bi-bank"></i>
                         <span>מעוניין לקחת משכנתא חדשה</span>
                     </a>
@@ -51,15 +51,15 @@
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown <%= currentPage === 'takemortgage' ? 'active' : '' %>" data-bs-toggle="collapse"
-                       data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
+                    <a href="#" class="sidebar-link collapsed has-dropdown <%= currentPage === 'takemortgage' || currentPage === 'takefewloans' || currentPage === 'takebigloan' ? 'active' : '' %>"
+                         data-bs-toggle="collapse" data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
                         <i class="bi bi-credit-card"></i>
                         <span>מעוניין לקחת הלוואה רגילה</span>
                     </a>
 
                     <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed <%= currentPage === 'takemortgage' ? 'active' : '' %>" data-bs-toggle="collapse"
+                            <a href="#" class="sidebar-link collapsed <%= currentPage === 'takemortgage' || currentPage === 'takefewloans' ? 'active' : '' %>" data-bs-toggle="collapse"
                              data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
                              <div class="indentless">
                              <i class="bi bi-coin"></i>
