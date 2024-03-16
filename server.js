@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -6,7 +7,7 @@ const session = require('express-session');
 const mailer = require('./mailer.js');
 const app = express();
 const ejs = require('ejs');
-const mortgageval = require('./server-scripts/wheretakemort.js');
+//const { connectDB } = require('./db.js'); (SHAI) - THIS IS FOR MONGO
 
 const requireAuth = (req, res, next) => {
   if (req.session.userId) {
@@ -15,6 +16,8 @@ const requireAuth = (req, res, next) => {
     res.redirect('/login'); // User is not authenticated, redirect to login page
   }
 }
+
+// process.env.MONGO_URL
 
 app.use(session({
   secret: 's56d4fgs6fg54dd56s6sd5f4sdfasxc46548',
@@ -94,8 +97,8 @@ app.post('/wheregetmort', function (req, res) {
   if (!req.session.userId) {
     req.session.loginRedirect = '/wheregetmort';
     renderTemplate(req, res, 'login', { success: "nl" });// nl - not logged
-  }
-  else {
+    // res.redirect('/login?from=wheregetmort');
+  } else {
     db.submitMortgageRequest(req.session.userId, purpose, bank, loanAmount, citizenship, function (err) {
       if (err) {
         console.log(err);
@@ -112,9 +115,9 @@ app.post('/wheregetmort', function (req, res) {
 // Handle mortgage form submission
 app.post('/takemortgage', function (req, res) {
   const { rtmethod, bank, loanAmount, citizenship } = req.body;
-  if (!req.session.userId)
+  if (!req.session.userId) {
     renderTemplate(req, res, 'login', { success: "nl" });// nl - not logged
-  else {
+  } else {
     db.submitnloaneRequest(req.session.userId, rtmethod, bank, loanAmount, citizenship, function (err) {
       if (err) {
         console.log(err);
@@ -151,27 +154,29 @@ app.post('/login', function (req, res) {
 
 // Handle signup form submission
 app.post('/signup', function (req, res) {
-  const { fname, lname, password, email, phone } = req.body;
-
-
-  // Create user
-  db.createUser(fname, lname, email, phone, password, function (err, _row) {
-    if (err) {
-      if (err.code === 'SQLITE_CONSTRAINT' && err.errno === 19) {
-        if (err.message.includes('phone_number')) {
-          res.redirect('/signup?error=Phone number already exists');
-        }
-        if (err.message.includes('email')) {
-          res.redirect('/signup?error=Email already exists');
+  const { fname, lname, password, rpassword, email, phone } = req.body;
+  if (password != rpassword)
+    res.redirect(`/signup?error=pass do not match`);
+  else {
+    // Create user
+    db.createUser(fname, lname, email, phone, password, function (err, _row) {
+      if (err) {
+        if (err.code === 'SQLITE_CONSTRAINT' && err.errno === 19) {
+          if (err.message.includes('phone_number')) {
+            res.redirect('/signup?error=Phone number already exists');
+          }
+          if (err.message.includes('email')) {
+            res.redirect('/signup?error=Email already exists');
+          }
+        } else {
+          res.redirect('/signup?error=An error occurred');
         }
       } else {
-        res.redirect('/signup?error=An error occurred');
+        console.log("Registration successful");
+        res.redirect(`/signup?show=true&email=${email}&password=${password}`);
       }
-    } else {
-      console.log("Registration successful");
-      res.redirect(`/signup?show=true&email=${email}&password=${password}`);
-    }
-  });
+    });
+  }
 });
 
 // Index page
@@ -186,7 +191,9 @@ app.get('/takemortgage', function (req, res) {
 
 // where should i get a mortgage page
 app.get('/wheregetmort', function (req, res) {
-  renderTemplate(req, res, 'wheregetmort', { success: "no result" });
+  const isLoginRedirect = !!req.session.loginRedirect;
+  req.session.loginRedirect = null;
+  renderTemplate(req, res, 'wheregetmort', { success: "no result", loginRedirect: isLoginRedirect });
 });
 
 
@@ -283,7 +290,8 @@ process.on('SIGINT', () => {
   });
 });
 
-// Start the server on port 8080
+// Start the server on port 3005
 app.listen(3005, function () {
-  console.log('Server is running on http://localhost:8080');
+  console.log('Server is running on http://localhost:3005');
+  //connectDB(); FOR MONGO
 });
