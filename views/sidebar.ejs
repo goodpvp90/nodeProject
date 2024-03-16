@@ -82,7 +82,7 @@
                                 <li class="sidebar-item">
                                     
                                     <div class="indent">
-                                    <a href="takefewloans" class="sidebar-link">
+                                    <a href="takefewloans" class="sidebar-link <%= currentPage === 'takefewloans' ? 'active' : '' %>">
                                     <i class="bi bi-cash-coin"></i>
                                     <span>מעוניין לקחת כמה הלוואות</span>                            
                                     </a>
@@ -95,7 +95,7 @@
                             </ul>
                                 <li class="sidebar-item">
                                     <div class="indentless">
-                                    <a href="takebigloan" class="sidebar-link">
+                                    <a href="takebigloan" class="sidebar-link <%= currentPage === 'takebigloan' ? 'active' : '' %>">
                                         <i class="bi bi-piggy-bank-fill"></i>
                                         <span>הלוואה מעל 100 אלף ש"ח</span>
                                     </a>
@@ -106,7 +106,7 @@
                 </li>                
                
                 <li class="sidebar-item">
-                    <a href="contact" class="sidebar-link">
+                    <a href="contact" class="sidebar-link <%= currentPage === 'contact' ? 'active' : '' %>">
                         <i class="lni lni-envelope"></i>
                         <span>צור קשר</span>
                     </a>
