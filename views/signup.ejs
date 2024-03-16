@@ -55,12 +55,11 @@
             </div>
             <input name="password" id="password" type="password" class="form-control" placeholder="סיסמה" required>
           </div>
-          <p id="passwordError" class="error"></p>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-lock"></i></span>
             </div>
-            <input id="confirm-password" type="password" class="form-control" placeholder="סיסמה חוזרת" required>
+            <input name="rpassword" id="confirm-password" type="password" class="form-control" placeholder="סיסמה חוזרת" required>
           </div>
           <p id="confirmPasswordError" class="error"></p>
           <button type="submit" class="btn btn-primary btn-block">הירשם</button>
@@ -138,6 +137,8 @@
             case 'Phone number already exists':
               errorMessage.textContent = "Phone number already exists";
               break;
+            case 'pass do not match':
+              errorMessage.textContent = "Passwords do not match";
             default:
               form.appendChild(errorMessage);
           }

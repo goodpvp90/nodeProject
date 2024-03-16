@@ -38,6 +38,24 @@ document.getElementById("phone").addEventListener("input", function () {
     }
 });
 
+// Password matching check
+document.getElementById("confirm-password").addEventListener("input", function () {
+    let rpassword = document.getElementById("password").value;
+    const password = this.value;
+    const passValResult = validatePasswords(password, rpassword);
+    const passwordErr = document.getElementById("confirmPasswordError");
+    passwordErr.innerText = passValResult;
+
+    // Handle the class based on validation result
+    if (passwordErr.innerText === "נראה טוב!") {
+        passwordErr.classList.remove("error");
+        passwordErr.classList.add("success");
+    } else {
+        passwordErr.classList.remove("success");
+        passwordErr.classList.add("error");
+    }
+});
+
 function validateEmail(email) {
     // Basic email validation using the provided pattern attribute
     if (!/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(email)) {
@@ -60,6 +78,12 @@ function validatePhoneNumber(phoneNumber) {
         return "מספר הפלאפון צריך להכיל 10 ספרות";
     }
 
+    return "נראה טוב!";
+}
+
+function validatePasswords(password, rpassword) {
+    if (password != rpassword)
+        return "password do not match"
     return "נראה טוב!";
 }
 
