@@ -200,3 +200,26 @@ a.sidebar-link:hover {
 .tooltip-icon:hover .tooltiptext {
     visibility: visible;
 }
+
+a.asw-menu-btn {
+    left: 20px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+}
+div.asw-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 0 0 20px #00000080;
+    opacity: 97%;
+    transition: .3s;
+    z-index: 500000;
+    overflow: hidden;
+    background: #eff1f5;
+    width: 370px;
+    line-height: 1;
+    font-size: 16px;
+    height: 100%;
+    letter-spacing: .015em;
+}

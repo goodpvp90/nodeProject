@@ -21,3 +21,6 @@ accessibilityScript.onload = configureAccessibilitySettings;
 
 // Append the script element to the document head
 document.head.appendChild(accessibilityScript);
+
+// <script src="/scripts/accessTool.js" defer></script>
+//old script that goes on pages
