@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Noto Sans Hebrew');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 ::after,
 ::before {
@@ -28,16 +28,20 @@ body {
 }
 
 .wrapper {
+    position: relative;
     display: flex;
 }
 
 .main {
+    position: absolute;
+    top: 0;
+    left: 0;
     min-height: 100vh;
-    width: 100%;
+    width: calc(100% - 70px);
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     /*background-color: #fafbfe;*/
-    background-image: url(/images/professional-background.jpg);
+    /*background-image: url(/images/professional-background.jpg);*/
     background-position: center;
     background-size: cover;
 }
@@ -50,7 +54,8 @@ body {
     background-color: #0e2238;
     display: flex;
     flex-direction: column;
-    max-height: 100vh;
+    min-height: 100vh;
+    
 }
 
 #sidebar.expand {
@@ -171,11 +176,11 @@ a.sidebar-link:hover {
 }
 
 .tooltip-icon {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #999999;
     position: absolute;
-    right: 212px;
-    bottom: 13.5px;
+    right: 219px;
+    bottom: 16px;
 }
 
 .tooltip-icon .tooltiptext {
@@ -194,4 +199,27 @@ a.sidebar-link:hover {
 
 .tooltip-icon:hover .tooltiptext {
     visibility: visible;
+}
+
+a.asw-menu-btn {
+    left: 20px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+}
+div.asw-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 0 0 20px #00000080;
+    opacity: 97%;
+    transition: .3s;
+    z-index: 500000;
+    overflow: hidden;
+    background: #eff1f5;
+    width: 370px;
+    line-height: 1;
+    font-size: 16px;
+    height: 100%;
+    letter-spacing: .015em;
 }
