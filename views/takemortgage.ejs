@@ -14,17 +14,18 @@
   <link rel="icon" type="image/png" href="images/icon.png">
   <style>
     td {
-    padding: 20px; /* Adjust this value to set the desired padding between columns */
-  }
+      padding: 20px;
+      /* Adjust this value to set the desired padding between columns */
+    }
   </style>
 </head>
 
 <body>
   <%- include('sidebar') %>
 
-  <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="col-md-6 col-lg-4">
-        <% if (typeof success !== 'undefined' && success == true) { %>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+      <div class="col-md-6 col-lg-6">
+        <% if (typeof success !=='undefined' && success==true) { %>
           <table>
             <tr>
               <td>יש ליצור קשר עם הבנק {שם הבית להכניס לכאן}</td>
@@ -36,80 +37,90 @@
               <td colspan="4"><img src="/images/arrow.png" style="width: 100%;" alt="Image"></td>
             </tr>
             <tr>
-              <td  colspan="4">מחפש נותן שירות או צריך עזרה בתהליך? <a href="/contact">פנה אלינו</a></td>
+              <td colspan="4">מחפש נותן שירות או צריך עזרה בתהליך? <a href="/contact">פנה אלינו</a></td>
             </tr>
             <tr>
-              <td  colspan="4"><p><b>עלויות משוערות:</b></p><p>פתיחת תיק : 1000 ש"ח</p><p>עמלת ביצוע פעולה : 0.1%</p></td>
+              <td colspan="4">
+                <p><b>עלויות משוערות:</b></p>
+                <p>פתיחת תיק : 1000 ש"ח</p>
+                <p>עמלת ביצוע פעולה : 0.1%</p>
+              </td>
             </tr>
           </table>
           <% } %>
-          <% if (typeof success !== 'undefined' && success === "nl") { %> 
-            <h1>מצטערים, חייב להתחבר כדי לקבל תוצאה</h1>
-          <% } %>
-          <% if (typeof error !== 'undefined' && error) { %> 
-            <h1>שגיאה בקליטת הנתונים!</h1>
-          <% } %>
-      <% if (typeof success !== 'undefined' && success === "no result") { %> 
-        <form method="POST" action="takemortgage" onsubmit="/*return mortgageForm*/">
-          <h2 id="mortgage-title">הגשת בקשה להלוואה אחת</h2>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-university"></i></span>
-            </div>
-            <input name="bank" id="bank" type="text" class="form-control" placeholder="שם הבנק שבו יש לך חשבון" required>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">₪</span>
-            </div>
-            <input name="loanAmount" id="loanAmount" type="number" min="0" max="100"  class="form-control" placeholder=" סכום ההלוואה המבוקש באלפים עד 100 אלף)" required>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-flag"></i></span>
-            </div>
-            <input name="citizenship" id="citizenship" type="text" class="form-control" placeholder="אזרחות נוכחית" required>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-file-signature"></i></span>
-            </div>
-            <input name="rtmethod" id="rtmethod" type="text" class="form-control" placeholder="שיטת החזר מועדפת" required>
-          </div>
-          <div class="form-check mb-3">
-            <label class="form-check-label" for="fixedInterest">
-              ריבית פריים/ריבית קבועה צמודה למדד/ריבית קבועה לא צמודה
-            </label>
-          </div>
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" name="offerEstimate" id="offerEstimateYes" value="yes" required>
-            <label class="form-check-label" for="offerEstimateYes">
-              כן, אני מבין שההצעה היא רק להערכה
-            </label>
-          </div>
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" name="termsAgreement" id="termsAgreementYes" value="yes" required>
-            <label class="form-check-label" for="termsAgreementYes">
-              כן, קראתי והסכמתי לתנאי השירות
-            </label>
-          </div>
-          <a href="/pdf/terms.pdf" target="_blank">תנאי השירות</a>
-          <button type="submit" class="btn btn-primary btn-block">חשב</button>
-        </form>
-        <% } %>
+            <% if (typeof success !=='undefined' && success==="nl" ) { %>
+              <h1>מצטערים, חייב להתחבר כדי לקבל תוצאה</h1>
+              <% } %>
+                <% if (typeof error !=='undefined' && error) { %>
+                  <h1>שגיאה בקליטת הנתונים!</h1>
+                  <% } %>
+                    <% if (typeof success !=='undefined' && success==="no result" ) { %>
+                      <form method="POST" action="takemortgage" onsubmit="/*return mortgageForm*/">
+                        <h2 id="mortgage-title">הגשת בקשה להלוואה אחת</h2>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-university"></i></span>
+                          </div>
+                          <input name="bank" id="bank" type="text" class="form-control"
+                            placeholder="שם הבנק שבו יש לך חשבון" required>
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">₪</span>
+                          </div>
+                          <input name="loanAmount" id="loanAmount" type="number" min="0" max="100" class="form-control"
+                            placeholder=" סכום ההלוואה המבוקש באלפים עד 100 אלף)" required>
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-flag"></i></span>
+                          </div>
+                          <input name="citizenship" id="citizenship" type="text" class="form-control"
+                            placeholder="אזרחות נוכחית" required>
+                        </div>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-file-signature"></i></span>
+                          </div>
+                          <input name="rtmethod" id="rtmethod" type="text" class="form-control"
+                            placeholder="שיטת החזר מועדפת" required>
+                        </div>
+                        <div class="form-check mb-3">
+                          <label class="form-check-label" for="fixedInterest">
+                            ריבית פריים/ריבית קבועה צמודה למדד/ריבית קבועה לא צמודה
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input class="form-check-input" type="checkbox" name="offerEstimate" id="offerEstimateYes"
+                            value="yes" required>
+                          <label class="form-check-label" for="offerEstimateYes">
+                            כן, אני מבין שההצעה היא רק להערכה
+                          </label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input class="form-check-input" type="checkbox" name="termsAgreement" id="termsAgreementYes"
+                            value="yes" required>
+                          <label class="form-check-label" for="termsAgreementYes">
+                            כן, קראתי והסכמתי לתנאי השירות
+                          </label>
+                        </div>
+                        <a href="/pdf/terms.pdf" target="_blank">תנאי השירות</a>
+                        <button type="submit" class="btn btn-primary btn-block">חשב</button>
+                      </form>
+                      <% } %>
       </div>
     </div>
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!-- Popper JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-  <script>
-    // You can add any custom JavaScript logic here if needed
-  </script>
+    <script>
+      // You can add any custom JavaScript logic here if needed
+    </script>
 </body>
 
 </html>

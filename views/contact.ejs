@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>צור קשר</title>
     <!-- Latest compiled and minified CSS -->
@@ -9,56 +10,65 @@
     <link rel="icon" type="image/png" href="images/icon.png">
     <script src="/scripts/accessTool.js" defer></script>
 </head>
+
 <body>
     <%- include('sidebar') %>
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="mb-4">
-                    <% if (result == false) { %> 
-                        <h1>הייתה שגיאה, נסה במועד מאוחר יותר</h1>
-                    <% } %>
-                    <% if (result == true) { %> 
-                        <h1>נשלח בהצלחה, ניצור קשר בהקדם!</h1>
-                    <% } %>
-                    <% if (result == "no result") { %>
-                    <form method="POST" action="/contact" onsubmit="return contactForm()">
-                        <h2>צור קשר</h2>
-                        <input name="fname" id="fname" type="text" class="form-control mb-3" placeholder="שם פרטי*" required>
-                        <input name="lname" id="lname" type="text" class="form-control mb-3" placeholder="שם משפחה*" required>
-                        <input name="phone" id="phone" type="text" class="form-control mb-3" placeholder="טלפון*" required>
-                        <input name="email" id="email" type="text" class="form-control mb-3" placeholder="אימייל*" required>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="choose"><i class="fas fa-info-circle"></i></label>
-                            </div>
-                            <select name="selection" class="custom-select" required>
-                                <option value="" disabled selected>בחר אפשרות*</option>
-                                <option value="Option1">אפשרות 1</option>
-                                <option value="Option2">אפשרות 2</option>
-                                <option value="Option3">אפשרות 3</option>
-                            </select>
-                        </div>
-                        <textarea name="subject" id="subject" class="form-control mb-3" placeholder="נושא*"></textarea>
-                        <button id="login-btn" type="submit" class="btn btn-primary btn-block">שלח</button>
-                        <div id="validation"></div>
-                        <div id="rules"></div>
-                    </form>
-                    <% } %>
+        <div class="container d-flex justify-content-center align-items-center vh-100">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-4">
+                        <% if (result==false) { %>
+                            <h1>הייתה שגיאה, נסה במועד מאוחר יותר</h1>
+                            <% } %>
+                                <% if (result==true) { %>
+                                    <h1>נשלח בהצלחה, ניצור קשר בהקדם!</h1>
+                                    <% } %>
+                                        <% if (result=="no result" ) { %>
+                                            <form method="POST" action="/contact" onsubmit="return contactForm()">
+                                                <h2>צור קשר</h2>
+                                                <input name="fname" id="fname" type="text" class="form-control mb-3"
+                                                    placeholder="שם פרטי*" required>
+                                                <input name="lname" id="lname" type="text" class="form-control mb-3"
+                                                    placeholder="שם משפחה*" required>
+                                                <input name="phone" id="phone" type="text" class="form-control mb-3"
+                                                    placeholder="טלפון*" required>
+                                                <input name="email" id="email" type="text" class="form-control mb-3"
+                                                    placeholder="אימייל*" required>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="choose"><i
+                                                                class="fas fa-info-circle"></i></label>
+                                                    </div>
+                                                    <select name="selection" class="custom-select" required>
+                                                        <option value="" disabled selected>בחר אפשרות*</option>
+                                                        <option value="Option1">אפשרות 1</option>
+                                                        <option value="Option2">אפשרות 2</option>
+                                                        <option value="Option3">אפשרות 3</option>
+                                                    </select>
+                                                </div>
+                                                <textarea name="subject" id="subject" class="form-control mb-3"
+                                                    placeholder="נושא*"></textarea>
+                                                <button id="login-btn" type="submit"
+                                                    class="btn btn-primary btn-block">שלח</button>
+                                                <div id="validation"></div>
+                                                <div id="rules"></div>
+                                            </form>
+                                            <% } %>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4">
-            </div>
         </div>
-    </div>
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="/scripts/contact.js"></script>
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="/scripts/contact.js"></script>
 
 </body>
+
 </html>
