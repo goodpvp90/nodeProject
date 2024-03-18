@@ -8,15 +8,15 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="/scripts/signup.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Noto Sans Hebrew' rel='stylesheet'>
   <link rel="stylesheet" href="/styles/style.css" />
-  <!-- Disability tool -->
-  <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
-  <script src="/scripts/accessTool.js" defer></script>
+ 
   <link rel="icon" type="image/png" href="images/icon.png">
 </head>
 
 <body>
   <%- include('sidebar') %>
+  <div class="main">
     <div class="container d-flex justify-content-center align-items-center vh-100">
       <div class="col-md-6 col-lg-4">
         <form method="POST" action="/signup" onsubmit="return signUpForm()">
@@ -53,12 +53,11 @@
             </div>
             <input name="password" id="password" type="password" class="form-control" placeholder="סיסמה" required>
           </div>
-          <p id="passwordError" class="error"></p>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-lock"></i></span>
             </div>
-            <input id="confirm-password" type="password" class="form-control" placeholder="סיסמה חוזרת" required>
+            <input name="rpassword" id="confirm-password" type="password" class="form-control" placeholder="סיסמה חוזרת" required>
           </div>
           <p id="confirmPasswordError" class="error"></p>
           <button type="submit" class="btn btn-primary btn-block">הירשם</button>
@@ -88,6 +87,7 @@
         </div>
       </div>
     </div>
+  </div> 
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -135,6 +135,8 @@
             case 'Phone number already exists':
               errorMessage.textContent = "Phone number already exists";
               break;
+            case 'pass do not match':
+              errorMessage.textContent = "Passwords do not match";
             default:
               form.appendChild(errorMessage);
           }
