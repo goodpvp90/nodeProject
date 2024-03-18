@@ -116,6 +116,7 @@ app.post('/wheregetmort', function (req, res) {
 app.post('/takemortgage', function (req, res) {
   const { rtmethod, bank, loanAmount, citizenship } = req.body;
   if (!req.session.userId) {
+    req.session.loginRedirect = '/takemortgage';
     renderTemplate(req, res, 'login', { success: "nl" });// nl - not logged
   } else {
     db.submitnloaneRequest(req.session.userId, rtmethod, bank, loanAmount, citizenship, function (err) {
@@ -186,7 +187,9 @@ app.get('/', function (req, res) {
 
 // where should i get a one loan page
 app.get('/takemortgage', function (req, res) {
-  renderTemplate(req, res, 'takemortgage', { success: "no result" });
+  const isLoginRedirect = !!req.session.loginRedirect;
+  req.session.loginRedirect = null;
+  renderTemplate(req, res, 'takemortgage', { success: "no result", loginRedirect: isLoginRedirect });
 });
 
 // where should i get a mortgage page

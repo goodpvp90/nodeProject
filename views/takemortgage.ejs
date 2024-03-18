@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href='https://fonts.googleapis.com/css?family=Noto Sans Hebrew' rel='stylesheet'>
   <link rel="stylesheet" href="/styles/style.css" />
+  <script src="/scripts/takemortgage.js" defer></script>
   <!-- Disability tool -->
 
   <link rel="icon" type="image/png" href="images/icon.png">
@@ -24,6 +25,21 @@
   <div class="main">
   <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="col-md-8 col-lg-6">
+        <% if (typeof success !=='undefined' && success==true) { %>
+          <script>
+              window.addEventListener("load", () => {
+                  cleanLocalStorage();
+              });
+          </script>
+        <% } %>
+
+        <% if (typeof loginRedirect !=='undefined' && loginRedirect==true) { %>
+          <script>
+              window.addEventListener("load", () => {
+                  loadMortgageForm();
+              });
+          </script>
+        <% } %>
         <% if (typeof success !== 'undefined' && success == true) { %>
           <table>
             <tr>
@@ -50,7 +66,7 @@
             <h1>שגיאה בקליטת הנתונים!</h1>
           <% } %>
       <% if (typeof success !== 'undefined' && success === "no result") { %> 
-        <form method="POST" action="takemortgage" onsubmit="/*return mortgageForm*/">
+        <form method="POST" action="takemortgage" onsubmit="return mortgageForm()">
           <div class="titleCard text-center align-items-center">
           <h2 id="mortgage-title">הגשת בקשה להלוואה אחת</h2>
           </div>
