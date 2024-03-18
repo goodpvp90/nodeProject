@@ -10,84 +10,85 @@
   <script src="/scripts/signup.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Noto Sans Hebrew' rel='stylesheet'>
   <link rel="stylesheet" href="/styles/style.css" />
- 
+
   <link rel="icon" type="image/png" href="images/icon.png">
 </head>
 
 <body>
   <%- include('sidebar') %>
-  <div class="main">
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-      <div class="col-md-6 col-lg-4">
-        <form method="POST" action="/signup" onsubmit="return signUpForm()">
-          <h2 id="login-title">הרשמה</h2>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-user"></i></span>
+    <div class="main">
+      <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="col-md-6 col-lg-4">
+          <form method="POST" action="/signup" onsubmit="return signUpForm()">
+            <h2 id="login-title" class="logintitle">הרשמה</h2>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <input name="fname" id="firstname" type="text" class="form-control" placeholder="שם פרטי" required>
             </div>
-            <input name="fname" id="firstname" type="text" class="form-control" placeholder="שם פרטי" required>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <input name="lname" id="lname" type="text" class="form-control" placeholder="שם משפחה" required>
             </div>
-            <input name="lname" id="lname" type="text" class="form-control" placeholder="שם משפחה" required>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-at"></i></span>
+              </div>
+              <input name="email" id="email" type="text" class="form-control" placeholder="כתובת מייל" required>
             </div>
-            <input name="email" id="email" type="text" class="form-control" placeholder="כתובת מייל" required>
-          </div>
-          <p id="emailError" class="error"></p>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <p id="emailError" class="error"></p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+              </div>
+              <input name="phone" id="phone" type="text" class="form-control" placeholder="טלפון" required>
             </div>
-            <input name="phone" id="phone" type="text" class="form-control" placeholder="טלפון" required>
-          </div>
-          <p id="phoneError" class="error"></p>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <p id="phoneError" class="error"></p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              </div>
+              <input name="password" id="password" type="password" class="form-control" placeholder="סיסמה" required>
             </div>
-            <input name="password" id="password" type="password" class="form-control" placeholder="סיסמה" required>
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              </div>
+              <input name="rpassword" id="confirm-password" type="password" class="form-control"
+                placeholder="סיסמה חוזרת" required>
             </div>
-            <input name="rpassword" id="confirm-password" type="password" class="form-control" placeholder="סיסמה חוזרת" required>
-          </div>
-          <p id="confirmPasswordError" class="error"></p>
-          <button type="submit" class="btn btn-primary btn-block">הירשם</button>
-          <p>קיים כבר משתמש? <a href="/login">התחברות</a></p>
-          <div id="validation"></div>
-          <div id="rules"></div>
-        </form>
+            <p id="confirmPasswordError" class="error"></p>
+            <button type="submit" id="submitsignupbutton" class="btn btn-block">הירשם</button>
+            <p>קיים כבר משתמש? <a href="/login">התחברות</a></p>
+            <div id="validation"></div>
+            <div id="rules"></div>
+          </form>
+        </div>
       </div>
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="signupModalLabel">פרטי התחברות</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p><strong>אי-מייל:</strong> <span id="modalEmail"></span></p>
-            <p><strong>סיסמה:</strong> <span id="modalPassword"></span></p>
-            <p class="text-success">החשבון נפתח בהצלחה!</p>
+      <!-- Modal -->
+      <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="signupModalLabel">פרטי התחברות</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p><strong>אי-מייל:</strong> <span id="modalEmail"></span></p>
+              <p><strong>סיסמה:</strong> <span id="modalPassword"></span></p>
+              <p class="text-success">החשבון נפתח בהצלחה!</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div> 
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
