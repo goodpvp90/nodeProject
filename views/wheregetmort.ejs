@@ -19,10 +19,12 @@
             background-color: #3b7ddd;
         }
 
-        /* Green text for the third column in the first row */
-        .table-custom tr:first-of-type td:nth-of-type(4) {
-            color: green;
+        /* Style for the fourth column title and cells */
+        .table thead th:nth-child(4),
+        .table tbody tr td:nth-child(4) {
+        color: green;
         }
+        
     </style>
 </head>
 
@@ -50,36 +52,41 @@
 
                     <% if (typeof success !=='undefined' && success==true) { %>
                         <h4>הכי כדאי מבחינת עמלות - <div style="color:green">אופצייה ג' בנק לאומי</div></h4>
-                        <table class="table table-bordered table-striped table-custom">
-                            <tr>
-                                <td></td>
-                                <td>אופציה א</td>
-                                <td>אופציה ב</td>
-                                <td>אופציה ג</td>
-                                <td>אופציה ד</td>
-                            </tr>
-                            <tr>
-                                <td></td>
+                        <table class="table">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col"></th>
+                                <th scope="col">אופציה א</th>
+                                <th scope="col">אופציה ב</th>
+                                <th scope="col">אופציה ג</th>
+                                <th scope="col">אופציה ד</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row"></th>
                                 <td>בנק הפועלים</td>
                                 <td>בנק מזרחי</td>
                                 <td>בנק לאומי</td>
                                 <td>בנק אגוד</td>
-                            </tr>
-                            <tr>
-                                <td>עמלת פקיד</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">עמלת פקיד</th>
                                 <td>1.2%</td>
                                 <td>5.6%</td>
                                 <td>1%</td>
                                 <td>7%</td>
-                            </tr>
-                            <tr>
-                                <td>עמלת פעולה</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">עמלת פעולה</th>
                                 <td>0%</td>
                                 <td>84 ש"ח לשנה</td>
                                 <td>0%</td>
                                 <td>0.24% בשנה</td>
-                            </tr>
-                        </table>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <p>* הערכה בלבד</p>
                     <% } %>
                         
                     
