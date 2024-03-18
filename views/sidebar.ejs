@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/styles/sideBarStyle.css">
+    
+    
 </head>
 <body>
     <div class="wrapper">
@@ -27,22 +29,22 @@
             
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="/" class="sidebar-link <%= currentPage === '/' ? 'active' : '' %>">
+                    <a href="/" class="sidebar-link <%= currentPage === 'index' ? 'active' : '' %>">
                         <i class="lni lni-home"></i>
                         <span>דף הבית</span>
                     </a>
                 </li>
                 
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown <%= currentPage === 'whereGetMort' ? 'active' : '' %>" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                    <a href="#" class="sidebar-link collapsed has-dropdown <%= currentPage === 'wheregetmort' ? 'active' : '' %>"
+                         data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="bi bi-bank"></i>
                         <span>מעוניין לקחת משכנתא חדשה</span>
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
                             <div class="indent">   
-                            <a href="whereGetMort" class="sidebar-link <%= currentPage === 'whereGetMort' ? 'active' : '' %>">
+                            <a href="wheregetmort" class="sidebar-link <%= currentPage === 'wheregetmort' ? 'active' : '' %>">
                                 <i class="lni lni-calculator-alt"></i>
                                 <span>איפה כדאי לקחת משכנתא</span>
                             </a>
@@ -51,15 +53,15 @@
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown <%= currentPage === 'takemortgage' ? 'active' : '' %>" data-bs-toggle="collapse"
-                       data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
+                    <a href="#" class="sidebar-link collapsed has-dropdown <%= currentPage === 'takemortgage' || currentPage === 'takefewloans' || currentPage === 'takebigloan' ? 'active' : '' %>"
+                         data-bs-toggle="collapse" data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
                         <i class="bi bi-credit-card"></i>
                         <span>מעוניין לקחת הלוואה רגילה</span>
                     </a>
 
                     <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed <%= currentPage === 'takemortgage' ? 'active' : '' %>" data-bs-toggle="collapse"
+                            <a href="#" class="sidebar-link collapsed <%= currentPage === 'takemortgage' || currentPage === 'takefewloans' ? 'active' : '' %>" data-bs-toggle="collapse"
                              data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
                              <div class="indentless">
                              <i class="bi bi-coin"></i>
@@ -82,7 +84,7 @@
                                 <li class="sidebar-item">
                                     
                                     <div class="indent">
-                                    <a href="takefewloans" class="sidebar-link">
+                                    <a href="takefewloans" class="sidebar-link <%= currentPage === 'takefewloans' ? 'active' : '' %>">
                                     <i class="bi bi-cash-coin"></i>
                                     <span>מעוניין לקחת כמה הלוואות</span>                            
                                     </a>
@@ -95,7 +97,7 @@
                             </ul>
                                 <li class="sidebar-item">
                                     <div class="indentless">
-                                    <a href="takebigloan" class="sidebar-link">
+                                    <a href="takebigloan" class="sidebar-link <%= currentPage === 'takebigloan' ? 'active' : '' %>">
                                         <i class="bi bi-piggy-bank-fill"></i>
                                         <span>הלוואה מעל 100 אלף ש"ח</span>
                                     </a>
@@ -106,7 +108,7 @@
                 </li>                
                
                 <li class="sidebar-item">
-                    <a href="contact" class="sidebar-link">
+                    <a href="contact" class="sidebar-link <%= currentPage === 'contact' ? 'active' : '' %>">
                         <i class="lni lni-envelope"></i>
                         <span>צור קשר</span>
                     </a>
@@ -131,7 +133,7 @@
                         </li>
                         
                         <li class="sidebar-item">
-                            <a href="signUp" class="sidebar-link">
+                            <a href="signup" class="sidebar-link">
                                 <div class="indent">
                                 <i class="fa fa-hand-pointer-o"></i>
                                 <span>הרשמה</span>
@@ -163,9 +165,11 @@
                     <% } %>
             </li>
         </aside>
+    </div>
          
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/scripts/sideBarLayOut.js"></script>
+    <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
 </body>
 
 </html>

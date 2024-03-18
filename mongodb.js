@@ -1,17 +1,31 @@
+const { MongoClient } = require("mongodb");
+
+let client;
+let db;
+
+async function connect() {
+    const uri = process.env.MONGO_URL;
+    client = new MongoClient(uri);
+    await client.connect();
+    const dbName = "database";
+    db = client.db(dbName);
+}
+
+
 const sqlite3 = require('sqlite3').verbose();
 
-//Establishing SQLite database connection to a file named "database.db"
-const db = new sqlite3.Database('database.db', (err) => {
-    if (err) {
-        console.error('Error connecting to database:', err.message);
-    } else {
-        console.log('Connected to the SQLite database.');
-        // Create users table if it doesn't exist
-        //createUsersTable();
-        //requestsTable();
-        //nloan_requestsTable();
-    }
-});
+// Establishing SQLite database connection to a file named "database.db"
+// const db = new sqlite3.Database('database.db', (err) => {
+//     if (err) {
+//         console.error('Error connecting to database:', err.message);
+//     } else {
+//         console.log('Connected to the SQLite database.');
+//         // Create users table if it doesn't exist
+//         //createUsersTable();
+//         //requestsTable();
+//         //nloan_requestsTable();
+//     }
+// });
 
 /*
 // Function to create users table
@@ -58,7 +72,15 @@ function nloan_requestsTable() {
 
 // Function to insert a new user into the database
 function createUser(firstname, lastname, email, phone, password, callback) {
-    db.run(`INSERT INTO users (firstname, lastname, email, password, phone_number) VALUES (?, ?, ?, ?, ?)`, [firstname, lastname, email, password, phone], callback);
+    const collection = db.collection("users");
+    const user = {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+        phone_number: phone
+    };
+    collection.insertOne(user).then(callback);
 }
 
 // Function to validate login credentials
@@ -93,6 +115,7 @@ function submitnloaneRequest(id, rtmethod, bank, loanAmount, citizenship, callba
 
 // Exporting functions to make them accessible from other files
 module.exports = {
+    connectDB: connect,
     createUser,
     validateLogin,
     validateEmail,
