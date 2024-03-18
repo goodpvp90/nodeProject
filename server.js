@@ -187,7 +187,9 @@ app.get('/', function (req, res) {
 
 // where should i get a one loan page
 app.get('/takemortgage', function (req, res) {
-  renderTemplate(req, res, 'takemortgage', { success: "no result" });
+  const isLoginRedirect = !!req.session.loginRedirect;
+  req.session.loginRedirect = null;
+  renderTemplate(req, res, 'takemortgage', { success: "no result", loginRedirect: isLoginRedirect });
 });
 
 // where should i get a mortgage page

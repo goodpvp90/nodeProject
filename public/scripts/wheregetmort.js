@@ -23,7 +23,7 @@ function loadMortgageForm() {
 }
 
 function cleanLocalStorage() {
-    localStorag.removeItem('purpose');
+    localStorage.removeItem('purpose');
     localStorage.removeItem('bank');
     localStorage.removeItem('loanAmount');
     localStorage.removeItem('citizenship');
