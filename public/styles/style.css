@@ -18,6 +18,11 @@ body {
     overflow-y: hidden;
 }
 
+.form-check-label {
+    vertical-align: middle; /* Align the checkbox vertically in the middle */
+    margin-right: 20px; /* Add some space between the checkbox and the label */
+}
+
 .error {
     color: red;
     font-size: 0.8em;
