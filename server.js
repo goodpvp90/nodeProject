@@ -116,6 +116,7 @@ app.post('/wheregetmort', function (req, res) {
 app.post('/takemortgage', function (req, res) {
   const { rtmethod, bank, loanAmount, citizenship } = req.body;
   if (!req.session.userId) {
+    req.session.loginRedirect = '/takemortgage';
     renderTemplate(req, res, 'login', { success: "nl" });// nl - not logged
   } else {
     db.submitnloaneRequest(req.session.userId, rtmethod, bank, loanAmount, citizenship, function (err) {
