@@ -25,15 +25,17 @@
                     <% } %>
                     <% if (result == "no result") { %>
                     <form method="POST" action="/takebigloan" onsubmit="return contactForm()">
-                        <h1 style="color:green">ברצוני לקחת הלוואה גדולה</h1>
+                        <h1 style="color:blue; text-align: center;">ברצוני לקחת הלוואה גדולה</h1>
+                        <div class="titleCard text-center align-items-center">
                         <h2>צור קשר</h2>
+                        </div>
                         <input name="fname" id="fname" type="text" class="form-control mb-3" placeholder="שם פרטי*" required>
                         <input name="lname" id="lname" type="text" class="form-control mb-3" placeholder="שם משפחה*" required>
                         <input name="phone" id="phone" type="text" class="form-control mb-3" placeholder="טלפון*" required>
                         <input name="email" id="email" type="text" class="form-control mb-3" placeholder="אימייל*" required>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="choose"><i class="fas fa-info-circle"></i></label>
+                                <label class="input-group-text" for="choose"><i id ="iconDesign" class="fas fa-info-circle"></i></label>
                             </div>
                             <select name="selection" class="custom-select" required>
                                 <option value="" disabled selected>בחר אפשרות*</option>
@@ -43,7 +45,7 @@
                             </select>
                         </div>
                         <textarea name="subject" id="subject" class="form-control mb-3" placeholder="נושא*"></textarea>
-                        <button id="login-btn" type="submit" class="btn btn-primary btn-block">שלח</button>
+                        <button id="login-btn" type="submit" class="btn btn-custom btn-block">שלח</button>
                         <div id="validation"></div>
                         <div id="rules"></div>
                     </form>
