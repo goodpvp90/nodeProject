@@ -6,8 +6,8 @@ const db = require('./db.js');
 const session = require('express-session');
 const mailer = require('./mailer.js');
 const app = express();
+const bcrypt = require('bcrypt');
 const ejs = require('ejs');
-//const { connectDB } = require('./db.js'); (SHAI) - THIS IS FOR MONGO
 
 const requireAuth = (req, res, next) => {
   if (req.session.userId) {
@@ -30,8 +30,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+
+// Function to generate a random password
+function generateRandomPassword(length = 8) {
+  const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+  let password = '';
+  for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset[randomIndex];
+  }
+  return password;
+}
+
+
 // Handle Reset Password form submission
-app.post('/newpass', function (req, res) {
+app.post('/newpass', async function (req, res) {
   const { password, rpassword } = req.body;
   if (password !== rpassword) {
     res.redirect('/newpass?result=notmatch');
@@ -39,7 +52,9 @@ app.post('/newpass', function (req, res) {
   }
 
   // Reset password
-  db.resetPassword(password, req.session.userId, function (err) {
+  // Hash the password
+  const hashedPassword = await bcrypt.hash(password, 10);
+  db.resetPassword(hashedPassword, req.session.userId, function (err) {
     if (err) {
       res.redirect('/newpass?result=false');
     } else {
@@ -53,12 +68,21 @@ app.post('/restore', function (req, res) {
   const { username } = req.body;
 
   // Validate email
-  db.validateEmail(username, function (err, row) {
+  db.validateEmail(username, async function (err, row) {
     if (err || !row) {
       res.redirect('/restore?result=false');
     } else {
-      mailer.restorePassword(username, row.password);
-      res.redirect(`/restore?result=true&email=${username}`);
+      const randomPassword = generateRandomPassword();
+      const hashedPassword = await bcrypt.hash(randomPassword, 10);
+      db.resetPassword(hashedPassword, username, function (err) {
+        console.log(hashedPassword);
+        if (err) {
+          res.redirect('/restore?result=false');
+        } else {
+          mailer.restorePassword(username, randomPassword);
+          res.redirect(`/restore?result=true&email=${username}`);
+        }
+      });
     }
   });
 });
@@ -137,30 +161,44 @@ app.post('/takemortgage', function (req, res) {
 // Handle login form submission //#### TO DO , CHANGE IT TO EJS HANDLE!
 app.post('/login', function (req, res) {
   const { username, password } = req.body;
-
-  // Validate login credentials
-  db.validateLogin(username, password, function (err, row) {
-    if (err || !row) {
-      res.redirect('/login?error=Incorrect email or password');
-    } else {
-      req.session.userId = username;
-      if (req.session.loginRedirect) {
-        res.redirect(req.session.loginRedirect);
+  console.log(username);
+// Validate login credentials
+db.validateLogin(username, async function (err, row) {
+  if (err || !row) {
+    res.redirect('/login?error=Incorrect email');
+  } else {
+    try {
+      const hashedPassword = row.password;
+      console.log(hashedPassword);
+      // Compare hashed password with the provided password
+      const match = await bcrypt.compare(password, hashedPassword);
+      if (match) {
+        req.session.userId = username;
+        if (req.session.loginRedirect) {
+          res.redirect(req.session.loginRedirect);
+        } else {
+          res.redirect('/');
+        }
       } else {
-        res.redirect('/');
+        res.redirect('/login?error=Incorrect password');
       }
+    } catch (error) {
+      return res.status(500).send('Error comparing passwords');
     }
-  });
+  }
+});
 });
 
 // Handle signup form submission
-app.post('/signup', function (req, res) {
+app.post('/signup', async function (req, res) {
   const { fname, lname, password, rpassword, email, phone } = req.body;
   if (password != rpassword)
     res.redirect(`/signup?error=pass do not match`);
   else {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
     // Create user
-    db.createUser(fname, lname, email, phone, password, function (err, _row) {
+    db.createUser(fname, lname, email, phone, hashedPassword, function (err, _row) {
       if (err) {
         if (err.code === 'SQLITE_CONSTRAINT' && err.errno === 19) {
           if (err.message.includes('phone_number')) {

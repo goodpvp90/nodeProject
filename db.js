@@ -62,8 +62,8 @@ function createUser(firstname, lastname, email, phone, password, callback) {
 }
 
 // Function to validate login credentials
-function validateLogin(email, password, callback) {
-    db.get(`SELECT * FROM users WHERE email = ? AND password = ?`, [email, password], callback);
+function validateLogin(email, callback) {
+    db.get(`SELECT * FROM users WHERE email = ? `, [email, ], callback);
 }
 
 // Function to validate email-restore(password) credentials
