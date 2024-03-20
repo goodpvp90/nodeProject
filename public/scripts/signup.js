@@ -67,10 +67,7 @@ function validatePhoneNumber(phoneNumber) {
     if (!/^0/.test(phoneNumber)) {
         return "מספר הפלאפון חייב להתחיל בספרה 0"
     }
-    if (!/-/.test(phoneNumber)) {
-        return "בבקשה הכנס מספר בפורמט 052-2999044"
-    }
-    if (!/^0[1-9][0-9]-\d{7}$/.test(phoneNumber)) {
+    if (phoneNumber.length != 10) {
         return "מספר הפלאפון צריך להכיל 10 ספרות";
     }
 

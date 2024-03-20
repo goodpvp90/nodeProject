@@ -62,11 +62,14 @@
             </div>
             <p id="confirmPasswordError" class="error"></p>
             <button type="submit" id="submitsignupbutton" class="btn btn-block">הירשם</button>
-            <% if (typeof validPassword !=='undefined' && valresult==="passnotmatch" ) { %>
+            <% if (typeof valresult !=='undefined' && valresult=="passnotmatch" ) { %>
               <p style="color:red">סיסמאות לא תואמות</p>
             <% } %>
-            <% if (typeof validPassword !=='undefined' && valresult==="invalidFname" ) { %>
+            <% if (typeof valresult !=='undefined' && valresult=="invalidFname" ) { %>
               <p style="color:red">שם פרטי לא תקין</p>
+            <% } %>
+            <% if (typeof valresult !=='undefined' && valresult=="falsePhone" ) { %>
+              <p style="color:red">טלפון לא תקין</p>
             <% } %>
             <p>קיים כבר משתמש? <a href="/login">התחברות</a></p>
             <p></p>
