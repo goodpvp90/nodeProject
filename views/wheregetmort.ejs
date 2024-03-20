@@ -108,10 +108,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
+                                    <span style="color: #203f61">מעוניין לקחת משכנתא עבור</span>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i
-                                                    class="fas fa-file-signature"></i></span>
+                                            <span class="input-group-text">
+                                                <i id="iconDesign" class="fas fa-file-signature"></i></span>
                                         </div>
                                         <select name="purpose" id="purpose"
                                             class="custom-select" required>
@@ -124,10 +125,11 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
+                                    <span style="color: #203f61">שם הבנק בו מתנהל חשבונך</span>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i
-                                                    class="fas fa-university"></i></span>
+                                            <span class="input-group-text">
+                                                <i id="iconDesign" class="fas fa-university"></i></span>
                                         </div>
                                         <select name="bank" id="bank"
                                             class="custom-select" required>
@@ -157,26 +159,32 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
+                                    <span style="color: #203f61">כמה כסף אתה מעוניין להלוות?</span>
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">₪</span>
+                                        <div class="input-group-prepend" style="height: 38px;">
+                                            <span class="input-group-text">
+                                                <i id= "iconDesign" class="bi bi-coin"></i>
+                                            </span>
                                         </div>
                                         <input name="loanAmount" id="loanAmount"
                                             type="number" min="0" max="1000000"
                                             class="form-control"
-                                            placeholder="סכום ההלוואה המבוקש (עד ₪1,000,000)"
+                                            placeholder="סכום ההלוואה (עד ₪1,000,000)"
                                             required>
                                     </div>
                                 </div>
+                                
+                                
                                 <div class="col-md-6 mb-3">
+                                    <span style="color: #203f61">אזרחות נוכחית</span>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i
-                                                    class="fas fa-flag"></i></span>
+                                            <span class="input-group-text">
+                                                <i id="iconDesign" class="fas fa-flag"></i></span>
                                         </div>
                                         <select name="citizenship" id="citizenship"
                                             class="custom-select" required>
-                                            <option value="" disabled selected>אזרחות נוכחית</option>
+                                            <option value="" disabled selected>לחץ כדי לבחור</option>
                                             <option value="Option1">ישראלית</option>
                                             <option value="Option2">אמריקאית</option>
                                             <option value="Option3">אירופאית</option>
@@ -207,7 +215,27 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
             <!-- Latest compiled JavaScript -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+            <script>
+                const slideValue = document.getElementById("display");
+const inputSlider = document.getElementById("loanAmount");
 
+inputSlider.oninput = () => {
+    let value = inputSlider.value;
+    slideValue.textContent = value;
+    const thumbWidth = 20; // Adjust this value according to your slider thumb width
+    const trackWidth = inputSlider.offsetWidth - thumbWidth;
+    const percent = (value - inputSlider.min) / (inputSlider.max - inputSlider.min);
+    const leftPosition = percent * trackWidth;
+    slideValue.style.left = leftPosition + "px";
+    slideValue.style.transform = `translateX(-${percent * 100}%)`;
+    slideValue.classList.add("show");
+};
+
+inputSlider.onblur = () => {
+    slideValue.classList.remove("show");
+};
+
+                </script>
 </body>
 
 </html>
