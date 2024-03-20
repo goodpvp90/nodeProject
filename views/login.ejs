@@ -31,7 +31,6 @@
                     required />
                 </div>
                 <p id="emailError" class="error"></p>
-
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i id ="iconDesign" class="fas fa-lock"></i></span>
@@ -39,6 +38,12 @@
                   <input id="password" name="password" type="password" class="form-control" placeholder="סיסמה"
                     required />
                 </div>
+                <% if (typeof validEmail !=='undefined' && validEmail==="false" ) { %>
+                  <p style="color:red">Email is incorrect</p>
+                <% } %>
+                <% if (typeof validPassword !=='undefined' && validPassword==="false" ) { %>
+                  <p style="color:red">Password is incorrect</p>
+                <% } %>
                 <p id="passwordError" class="error"></p>
                 <button type="submit" id="submitLoginbutton" class="btn btn-block">
                   התחבר
@@ -50,30 +55,11 @@
           <script>
             document.addEventListener("DOMContentLoaded", function () {
               try {
-                const urlParams = new URLSearchParams(window.location.search);
-                const error = urlParams.get("error");
-                const errorMessage = document.createElement("p");
-                errorMessage.classList.add("text-danger");
                 const form = document.querySelector("form");
-
                 if (!form) {
                   console.error("Form not found on the page.");
                   return;
                 }
-
-                form.appendChild(errorMessage);
-
-                switch (error) {
-                  case 'it is not an email':
-                    errorMessage.textContent = "Type an email, please.";
-                    break;
-                  case 'Incorrect email or password':
-                    errorMessage.textContent = "Incorrect email or password.";
-                    break;
-                  default:
-                    form.appendChild(errorMessage);
-                }
-
                 // Reset URL parameters after processing
                 window.history.replaceState({}, document.title, window.location.pathname);
               } catch (error) {
