@@ -4,15 +4,17 @@ function validate(fname, lname, email, password, rpassword, phone) {
         return "falseEmail";
     }
     // Check if the cleaned phone number matches the desired pattern
-    if (phone.length != 10) {
-        console.log(phone, phone.length);
+    if (!/^0[0-9]{9}$/.test(phone)) {
         return "falsePhone";
     }
     if (password != rpassword) {
         return "passnotmatch";
     }
-    if (!/^[a-zA-Z]+$/.test(fname) || !/^[a-zA-Z]+$/.test(lname)) {
-        return "invalidName";
+    if (!/^[a-zA-Z]+$/.test(fname)) {
+        return "invalidFName";
+    }
+    if (!/^[a-zA-Z]+$/.test(lname)) {
+        return "invalidLName";
     }
 
     // All validations passed

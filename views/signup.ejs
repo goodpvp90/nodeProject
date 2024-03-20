@@ -68,6 +68,9 @@
             <% if (typeof valresult !=='undefined' && valresult=="invalidFname" ) { %>
               <p style="color:red">שם פרטי לא תקין</p>
             <% } %>
+            <% if (typeof valresult !=='undefined' && valresult=="invalidFname" ) { %>
+              <p style="color:red">שם משפחה לא תקין</p>
+            <% } %>
             <% if (typeof valresult !=='undefined' && valresult=="falsePhone" ) { %>
               <p style="color:red">טלפון לא תקין</p>
             <% } %>
@@ -139,10 +142,10 @@
 
           switch (error) {
             case 'Email already exists':
-              errorMessage.textContent = "Email already exists";
+              errorMessage.textContent = "אימייל כבר תפוס";
               break;
             case 'Phone number already exists':
-              errorMessage.textContent = "Phone number already exists";
+              errorMessage.textContent = "מספר טלפון כבר תפוס";
               break;
             default:
               form.appendChild(errorMessage);
