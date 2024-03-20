@@ -175,7 +175,7 @@ app.post('/login', function (req, res) {
           renderTemplate(req, res, 'login', { validPassword: 'false' });
         }
       } catch (error) {
-        return res.status(500).send('Error comparing passwords');
+        return res.status(500).send('בעיה טכנית, נסה שוב עם סיסמה שונה');
       }
     }
   });

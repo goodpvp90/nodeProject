@@ -39,7 +39,7 @@ function contactForm(fname, lname, phone, email, selection, subject, callback) {
         from: 'MashcantaRestore@gmail.com',
         to: `calc.task@gmail.com`,
         subject: `${selection}`,
-        text: `${fname} ${lname}, Contacting us regarding subject: ${subject}, customer email to reply: ${email}, customer phone: ${phone}`
+        html: `<div dir="rtl"><p>${fname} ${lname}</p><p> פונה אלינו בנושא: ${subject}</p> <p>כתובת מייל הלקוח: ${email}</p><p>טלפון הלקוח: ${phone}</p></div>`
     };
 
     transporter.sendMail(mailOptions, function (error, info) {

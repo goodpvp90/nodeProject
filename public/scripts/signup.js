@@ -70,7 +70,6 @@ function validatePhoneNumber(phoneNumber) {
     if (phoneNumber.length != 10) {
         return "מספר הפלאפון צריך להכיל 10 ספרות";
     }
-
     return "נראה טוב!";
 }
 
