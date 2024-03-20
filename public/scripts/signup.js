@@ -18,8 +18,6 @@ document.getElementById("email").addEventListener("input", async function () {
     }
 });
 
-
-
 // Attach an event listener to the phone number input field - update in real time
 document.getElementById("phone").addEventListener("input", function () {
     // Validate phone number whenever the input changes
@@ -63,8 +61,6 @@ function validateEmail(email) {
     }
     return "נראה טוב!";
 }
-
-
 
 function validatePhoneNumber(phoneNumber) {
     // Check if the cleaned phone number matches the desired pattern

@@ -1,4 +1,3 @@
-//require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -8,6 +7,7 @@ const mailer = require('./mailer.js');
 const app = express();
 const bcrypt = require('bcrypt');
 const ejs = require('ejs');
+const signupVal = require('./server-scripts/signup.js')
 
 const requireAuth = (req, res, next) => {
   if (req.session.userId) {
@@ -16,8 +16,6 @@ const requireAuth = (req, res, next) => {
     res.redirect('/login'); // User is not authenticated, redirect to login page
   }
 }
-
-// process.env.MONGO_URL
 
 app.use(session({
   secret: 's56d4fgs6fg54dd56s6sd5f4sdfasxc46548',
@@ -30,18 +28,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-
 // Function to generate a random password
 function generateRandomPassword(length = 8) {
   const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
   let password = '';
   for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charset.length);
-      password += charset[randomIndex];
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset[randomIndex];
   }
   return password;
 }
-
 
 // Handle Reset Password form submission
 app.post('/newpass', async function (req, res) {
@@ -87,7 +83,6 @@ app.post('/restore', function (req, res) {
   });
 });
 
-
 app.post('/contact', function (req, res) {
   const { fname, lname, phone, email, selection, subject } = req.body;
 
@@ -113,7 +108,6 @@ app.post('/takebigloan', function (req, res) {
     }
   });
 });
-
 
 // Handle mortgage form submission
 app.post('/wheregetmort', function (req, res) {
@@ -156,44 +150,44 @@ app.post('/takemortgage', function (req, res) {
   }
 });
 
-
-
 // Handle login form submission //#### TO DO , CHANGE IT TO EJS HANDLE!
 app.post('/login', function (req, res) {
   const { username, password } = req.body;
   console.log(username);
-// Validate login credentials
-db.validateLogin(username, async function (err, row) {
-  if (err || !row) {
-    res.redirect('/login?error=Incorrect email');
-  } else {
-    try {
-      const hashedPassword = row.password;
-      console.log(hashedPassword);
-      // Compare hashed password with the provided password
-      const match = await bcrypt.compare(password, hashedPassword);
-      if (match) {
-        req.session.userId = username;
-        if (req.session.loginRedirect) {
-          res.redirect(req.session.loginRedirect);
+  // Validate login credentials
+  db.validateLogin(username, async function (err, row) {
+    if (err || !row) {
+      renderTemplate(req, res, 'login', { validEmail: 'false' });
+    } else {
+      try {
+        const hashedPassword = row.password;
+        console.log(hashedPassword);
+        // Compare hashed password with the provided password
+        const match = await bcrypt.compare(password, hashedPassword);
+        if (match) {
+          req.session.userId = username;
+          if (req.session.loginRedirect) {
+            res.redirect(req.session.loginRedirect);
+          } else {
+            res.redirect('/');
+          }
         } else {
-          res.redirect('/');
+          renderTemplate(req, res, 'login', { validPassword: 'false' });
         }
-      } else {
-        res.redirect('/login?error=Incorrect password');
+      } catch (error) {
+        return res.status(500).send('Error comparing passwords');
       }
-    } catch (error) {
-      return res.status(500).send('Error comparing passwords');
     }
-  }
-});
+  });
 });
 
 // Handle signup form submission
 app.post('/signup', async function (req, res) {
   const { fname, lname, password, rpassword, email, phone } = req.body;
-  if (password != rpassword)
-    res.redirect(`/signup?error=pass do not match`);
+  if ((signupVal.validate(fname, lname, email, password, rpassword, phone)) != true) {
+    console.log(signupVal.validate(fname, lname, email, password, rpassword, phone));
+    renderTemplate(req, res, 'signup', { valresult: signupVal.validate(fname, lname, email, password, rpassword, phone) });
+  }
   else {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);

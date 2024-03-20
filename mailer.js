@@ -13,7 +13,7 @@ function restorePassword(email, password) {
         from: 'MashcantaRestore@gmail.com',
         to: `${email}`,
         subject: 'Restore password for Mashcanta Website',
-        text: `Your password for Mashcanta is : ${password}`
+        html: `<div dir="rtl">הסיסמה החדשה שלך לאתר היא  : <b>${password}</b><p>אתה יכול לשנות אותה אחרי התחברות בכרטיסייה שינוי סיסמה</p></div> `
     };
 
     transporter.sendMail(mailOptions, function (error, info) {

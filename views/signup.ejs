@@ -62,9 +62,14 @@
             </div>
             <p id="confirmPasswordError" class="error"></p>
             <button type="submit" id="submitsignupbutton" class="btn btn-block">הירשם</button>
+            <% if (typeof validPassword !=='undefined' && valresult==="passnotmatch" ) { %>
+              <p style="color:red">סיסמאות לא תואמות</p>
+            <% } %>
+            <% if (typeof validPassword !=='undefined' && valresult==="invalidFname" ) { %>
+              <p style="color:red">שם פרטי לא תקין</p>
+            <% } %>
             <p>קיים כבר משתמש? <a href="/login">התחברות</a></p>
-            <div id="validation"></div>
-            <div id="rules"></div>
+            <p></p>
           </form>
         </div>
       </div>
@@ -136,8 +141,6 @@
             case 'Phone number already exists':
               errorMessage.textContent = "Phone number already exists";
               break;
-            case 'pass do not match':
-              errorMessage.textContent = "Passwords do not match";
             default:
               form.appendChild(errorMessage);
           }
