@@ -133,6 +133,7 @@ body {
     background-position: left;
     padding-right: 0.65rem;
     opacity: 85%;
+    background-position-x: 2px;
 }
 
 .logintitle {
@@ -169,4 +170,9 @@ body {
 #submitsignupbutton:hover {
     background-color: #173c62;
     color: white;
+}
+
+#iconDesign{
+    margin-bottom: 7px;
+    color: #203f61;
 }

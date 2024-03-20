@@ -21,10 +21,12 @@
     <div class="container d-flex justify-content-center align-items-center vh-100">
       <div class="col-md-6 col-lg-4">
         <form method="POST" action="/newpass">
+          <div class="titleCard text-center align-items-center">
           <h2 id="login-title whi">איפוס סיסמה</h2>
+          </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-user"></i></span>
+              <span class="input-group-text"><i id ="iconDesign" class="fas fa-user"></i></span>
             </div>
             <input
               id="password"
@@ -37,7 +39,7 @@
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              <span class="input-group-text"><i id ="iconDesign" class="fas fa-lock"></i></span>
             </div>
             <input
               id="rpassword"
@@ -48,7 +50,7 @@
               required
             />
           </div>
-          <button type="submit" class="btn btn-primary btn-block">
+          <button type="submit" class="btn btn-custom btn-block">
             איפוס
           </button>
           <a href="/">חזרה לדף הראשי</a>

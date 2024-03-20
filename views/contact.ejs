@@ -2,13 +2,16 @@
 <html>
 <head>
     <title>צור קשר</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href='https://fonts.googleapis.com/css?family=Noto Sans Hebrew' rel='stylesheet'>
     <link rel="stylesheet" href="/styles/style.css" />
     <link rel="icon" type="image/png" href="images/icon.png">
-   
+
    
 </head>
 <body>
@@ -30,6 +33,32 @@
                         <div class="titleCard text-center align-items-center">
                         <h2>צור קשר</h2>
                         </div>
+                        <div class="row mb-4">
+                            <div class="col text-center"> 
+                                <div class="address details">
+                                  <i class="fas fa-map-marker-alt mb-2" style="font-size: 25px; color:#0e2238"></i>
+                                  <div class="topic" style="font-size: 18px; font-weight: 650; color:#0e2238">Address</div>
+                                  <div class="text-one">Karmiel, Snunit 51</div>
+                                </div>
+                            </div>
+
+                            <div class="col text-center">
+                                <div class="phone details">
+                                  <i class="fas fa-phone-alt mb-2" style="font-size: 25px; color:#0e2238"></i>
+                                  <div class="topic" style="font-size: 18px; font-weight: 650; color: #0e2238;">Phone</div>
+                                  <div class="text-one">4-908-6411 972+</div>
+                                </div>
+                            </div>
+
+                            <div class="col text-center">
+                                <div class="email details">
+                                  <i class="fas fa-envelope mb-2" style="font-size: 25px; color:#0e2238"></i>
+                                  <div class="topic" style="font-size: 18px; font-weight: 650; color:#0e2238">Email</div>
+                                  <div class="text-one">calc.task@gmail.com</div>
+                                </div>
+                            </div>
+                        </div>
+                            
                         <div class="row">
                             <div class="col-md-6">
                                 <input name="fname" id="fname" type="text" class="form-control mb-3" placeholder="שם פרטי*" required>
@@ -46,7 +75,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="choose"><i class="fas fa-info-circle"></i></label>
+                                <label class="input-group-text" for="choose"><i id="iconDesign" class="fas fa-info-circle"></i></label>
                             </div>
                             <select name="selection" class="custom-select"  required>
                                 <option value="" disabled selected>בחר אפשרות*</option>
