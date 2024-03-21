@@ -189,7 +189,8 @@ app.post('/signup', async function (req, res) {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
     // Create user
-    db.createUser(fname, lname, email, phone, hashedPassword, function (err, _row) {
+    db.createUser(fname, lname, email.toLowerCase(), phone, hashedPassword, function (err, _row) {
+      console.log(email.toLowerCase());
       if (err) {
         if (err.code === 'SQLITE_CONSTRAINT' && err.errno === 19) {
           if (err.message.includes('phone_number')) {
@@ -227,7 +228,6 @@ app.get('/wheregetmort', function (req, res) {
   req.session.loginRedirect = null;
   renderTemplate(req, res, 'wheregetmort', { success: "no result", loginRedirect: isLoginRedirect });
 });
-
 
 // where should i get a fewloans page
 app.get('/takefewloans', function (req, res) {

@@ -37,6 +37,24 @@ document.getElementById("phone").addEventListener("input", function () {
 });
 
 // Password matching check
+document.getElementById("password").addEventListener("input", function () {
+    let password = document.getElementById("confirm-password").value;
+    const rpassword = this.value;
+    const passValResult = validatePasswords(rpassword, password);
+    const passwordErr = document.getElementById("confirmPasswordError");
+    passwordErr.innerText = passValResult;
+
+    // Handle the class based on validation result
+    if (passwordErr.innerText === "נראה טוב!") {
+        passwordErr.classList.remove("error");
+        passwordErr.classList.add("success");
+    } else {
+        passwordErr.classList.remove("success");
+        passwordErr.classList.add("error");
+    }
+});
+
+// Password matching check
 document.getElementById("confirm-password").addEventListener("input", function () {
     let rpassword = document.getElementById("password").value;
     const password = this.value;
