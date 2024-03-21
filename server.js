@@ -154,7 +154,7 @@ app.post('/takemortgage', function (req, res) {
 app.post('/login', function (req, res) {
   const { username, password } = req.body;
   // Validate login credentials
-  db.validateLogin(username, async function (err, row) {
+  db.validateLogin(username.toLowerCase(), async function (err, row) {
     if (err || !row) {
       renderTemplate(req, res, 'login', { validEmail: 'false' });
     } else {
