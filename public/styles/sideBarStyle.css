@@ -36,9 +36,8 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    min-height: 100vh;
+    height: 100dvh;
     width: calc(100% - 70px);
-    overflow: hidden;
     transition: all 0.35s ease-in-out;
     /*background-color: #fafbfe;*/
     /*background-image: url(/images/professional-background.jpg);*/
@@ -54,7 +53,7 @@ body {
     background-color: #0e2238;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100dvh;
     
 }
 
@@ -90,6 +89,11 @@ body {
 #sidebar:not(.expand) .sidebar-logo,
 #sidebar:not(.expand) a.sidebar-link span {
     display: none;
+}
+
+#sidebar:not(.expand) .sidebar-item{
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 .sidebar-nav {
