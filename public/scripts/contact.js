@@ -9,6 +9,7 @@ function contactForm() {
   var errors = "";
   var validate = true;
   var email = document.getElementById('email');
+  var phone = document.getElementById('phone');
 
   //.test compares email field with regex.
   if (!emailRegex.test(email.value)) {
@@ -29,12 +30,22 @@ function contactForm() {
     validate = false;
   }
 
+  if (phone.value.length != 10) {
+    errors += '<p style="color:red;">Enter a phone</p>';
+    phone.focus();
+    validate = false;
+  }
+
+
   if (!validate) {
     validation.innerHTML = errors;
     rules.innerHTML = `<p>*Valid email address</p>
                             <p>*Enter a name</p>
-                            <p>*Enter a subject</p>`;
+                            <p>*Enter a subject</p>
+                            <p> Enter correct phone</p>`;
     return false;
   }
+
+
 
 }

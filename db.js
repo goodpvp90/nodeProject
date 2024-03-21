@@ -7,11 +7,12 @@ const db = new sqlite3.Database('database.db', (err) => {
     } else {
         console.log('Connected to the SQLite database.');
         // Create users table if it doesn't exist
-        //createUsersTable();
-        //requestsTable();
-        //nloan_requestsTable();
+        createUsersTable();
+        requestsTable();
+        nloan_requestsTable();
     }
 });
+
 
 /*
 // Function to create users table
@@ -22,7 +23,7 @@ function createUsersTable() {
                 lastname TEXT,
                 email TEXT UNIQUE,
                 password TEXT,
-                phone_number TEXT UNIQUE
+                phone_number TEXT 
             )`, (err) => {
         if (err) {
             console.error('Error creating users table:', err.message);
@@ -30,7 +31,7 @@ function createUsersTable() {
             console.log('Users table created successfully.');
         }
     });
-}*//*
+}
 //Function to create mortgage requests table
 function requestsTable() {
     db.run(`CREATE TABLE mortgage_requests (
@@ -42,8 +43,8 @@ function requestsTable() {
         citizenship TEXT NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(user_id))`
     );
-}*/
-/*
+}
+
 function nloan_requestsTable() {
     db.run(`CREATE TABLE nloan_requestsTable (
         request_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -63,7 +64,7 @@ function createUser(firstname, lastname, email, phone, password, callback) {
 
 // Function to validate login credentials
 function validateLogin(email, callback) {
-    db.get(`SELECT * FROM users WHERE email = ? `, [email, ], callback);
+    db.get(`SELECT * FROM users WHERE email = ? `, [email,], callback);
 }
 
 // Function to validate email-restore(password) credentials
