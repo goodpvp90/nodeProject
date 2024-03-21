@@ -20,7 +20,7 @@ document.getElementById("email").addEventListener("input", async function () {
 
 function validateEmail(email) {
     // Basic email validation using the provided pattern attribute
-    if (!/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(email)) {
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
         return " example@gmail.com בבקשה הכנס אימייל בפורמט תקין";
     }
     return "נראה טוב!";

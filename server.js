@@ -50,7 +50,7 @@ app.post('/newpass', async function (req, res) {
   // Reset password
   // Hash the password
   const hashedPassword = await bcrypt.hash(password, 10);
-  db.resetPassword(hashedPassword, req.session.userId, function (err) {
+  db.resetPassword(hashedPassword, req.session.userId.toLowerCase(), function (err) {
     if (err) {
       res.redirect('/newpass?result=false');
     } else {
@@ -71,7 +71,6 @@ app.post('/restore', function (req, res) {
       const randomPassword = generateRandomPassword();
       const hashedPassword = await bcrypt.hash(randomPassword, 10);
       db.resetPassword(hashedPassword, username, function (err) {
-        console.log(hashedPassword);
         if (err) {
           res.redirect('/restore?result=false');
         } else {
@@ -117,7 +116,7 @@ app.post('/wheregetmort', function (req, res) {
     renderTemplate(req, res, 'login', { success: "nl" });// nl - not logged
     // res.redirect('/login?from=wheregetmort');
   } else {
-    db.submitMortgageRequest(req.session.userId, purpose, bank, loanAmount, citizenship, function (err) {
+    db.submitMortgageRequest(req.session.userId.toLowerCase(), purpose, bank, loanAmount, citizenship, function (err) {
       if (err) {
         console.log(err);
         // Handle error appropriately, e.g., render the mortgage form again with an error message
@@ -137,7 +136,7 @@ app.post('/takemortgage', function (req, res) {
     req.session.loginRedirect = '/takemortgage';
     renderTemplate(req, res, 'login', { success: "nl" });// nl - not logged
   } else {
-    db.submitnloaneRequest(req.session.userId, rtmethod, bank, loanAmount, citizenship, function (err) {
+    db.submitnloaneRequest(req.session.userId.toLowerCase(), rtmethod, bank, loanAmount, citizenship, function (err) {
       if (err) {
         console.log(err);
         // Handle error appropriately, e.g., render the mortgage form again with an error message
@@ -190,7 +189,6 @@ app.post('/signup', async function (req, res) {
     const hashedPassword = await bcrypt.hash(password, 10);
     // Create user
     db.createUser(fname, lname, email.toLowerCase(), phone, hashedPassword, function (err, _row) {
-      console.log(email.toLowerCase());
       if (err) {
         if (err.code === 'SQLITE_CONSTRAINT' && err.errno === 19) {
           if (err.message.includes('phone_number')) {
@@ -203,7 +201,6 @@ app.post('/signup', async function (req, res) {
           res.redirect('/signup?error=An error occurred');
         }
       } else {
-        console.log("Registration successful");
         res.redirect(`/signup?show=true&email=${email}&password=${password}`);
       }
     });
@@ -283,10 +280,9 @@ app.get('/logout', function (req, res) {
 
 // Function to render templates
 function renderTemplate(req, res, templateName, templateData = {}) {
-  console.log(templateData);
   let templatePath = path.join(__dirname, 'views', `${templateName}.ejs`);
   if (req.session.userId) {
-    db.getFname(req.session.userId, function (err, row) {
+    db.getFname(req.session.userId.toLowerCase(), function (err, row) {
       if (err) {
         res.status(500).send('Error retrieving user data');
       } else {
