@@ -85,12 +85,16 @@ function validatePhoneNumber(phoneNumber) {
     if (phoneNumber.length != 10) {
         return "מספר הפלאפון צריך להכיל 10 ספרות";
     }
+    if (!/^0[0-9]{9}$/.test(phone)) {
+        return "מספר הפאלפון צריך להתחיל ב 0"
+    }
+
     return "נראה טוב!";
 }
 
 function validatePasswords(password, rpassword) {
     if (password != rpassword)
-        return "password do not match"
+        return "הסיסמאות לא תואמות"
     return "נראה טוב!";
 }
 
