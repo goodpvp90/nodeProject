@@ -64,9 +64,6 @@ function validateEmail(email) {
 
 function validatePhoneNumber(phoneNumber) {
     // Check if the cleaned phone number matches the desired pattern
-    if (!/^0/.test(phoneNumber)) {
-        return "מספר הפלאפון חייב להתחיל בספרה 0"
-    }
     if (phoneNumber.length != 10) {
         return "מספר הפלאפון צריך להכיל 10 ספרות";
     }
