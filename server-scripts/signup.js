@@ -10,6 +10,15 @@ function validate(fname, lname, email, password, rpassword, phone) {
     if (password != rpassword) {
         return "passnotmatch";
     }
+
+    if (!/^[a-zA-Z]+$/.test(fname)) {
+        return "invalidFname";
+    }
+
+    if (!/^[a-zA-Z]+$/.test(lname)) {
+        return "invalidLname";
+    }
+
     // All validations passed
     return true;
 }
