@@ -11,11 +11,11 @@ function validate(fname, lname, email, password, rpassword, phone) {
         return "passnotmatch";
     }
 
-    if (!/^[a-zA-Z]+$/.test(fname)) {
+    if (!/^[a-zA-Z\u0590-\u05FF]+$/.test(fname)) {
         return "invalidFname";
     }
 
-    if (!/^[a-zA-Z]+$/.test(lname)) {
+    if (!/^[a-zA-Z\u0590-\u05FF]+$/.test(lname)) {
         return "invalidLname";
     }
 
