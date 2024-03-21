@@ -60,13 +60,14 @@
           const urlParams = new URLSearchParams(window.location.search);
           const error = urlParams.get("result");
           const errorMessage = document.createElement("p");
+          errorMessage.classList.add("text-success");
+          document.querySelector("form").appendChild(errorMessage);
           switch(error) {
             case 'true':
-              errorMessage.classList.add("text-success");
-              errorMessage.textContent = "הסיסמה אופסה בחזרה";
+              errorMessage.textContent = "הסיסמה אופסה ";
               break;
             case 'false':
-              errorMessage.classList.add("text-danger"); 
+              errorMessage.classList.add("text-danger");
               errorMessage.textContent = "הסיסמה לא אופסה";  
               break;
             case 'notmatch':
