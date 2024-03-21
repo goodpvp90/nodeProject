@@ -72,14 +72,15 @@
           </div>
           <div class="row">
             <div class="col-md-6 mb-3">
+              <span style="color: #203f61">בחר שיטת החזר רצויה</span>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i
-                                class="fas fa-file-signature"></i></span>
+                        <span class="input-group-text">
+                          <i id="iconDesign" class="fas fa-file-signature"></i></span>
                     </div>
                     <select name="rtmethod" id="rtmethod"
                         class="custom-select" required>
-                        <option value="" disabled selected> שיטת החזר מועדפת</option>
+                        <option value="" disabled selected> לחץ כדי לבחור</option>
                         <option value="Option1">ריבית פריים</option>
                         <option value="Option2">ריבית קבועה צמודה למדד</option>
                         <option value="Option3">ריבית קבועה לא צמודה</option>
@@ -88,10 +89,11 @@
                 </div>
             </div>
             <div class="col-md-6 mb-3">
+              <span style="color: #203f61">שם הבנק בו מתנהל חשבונך</span>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i
-                                class="fas fa-university"></i></span>
+                        <span class="input-group-text">
+                          <i id="iconDesign" class="fas fa-university"></i></span>
                     </div>
                     <select name="bank" id="bank"
                         class="custom-select" required>
@@ -120,9 +122,12 @@
                 </div>
             </div>
             <div class="col-md-6 mb-3">
+              <span style="color: #203f61">כמה כסף אתה מעוניין להלוות</span>
                 <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">₪</span>
+                    <div class="input-group-prepend " style="height: 38px;">
+                        <span class="input-group-text">
+                          <i id= "iconDesign" class="bi bi-coin"></i>
+                        </span>
                     </div>
                     <input name="loanAmount" id="loanAmount"
                         type="number" min="0" max="100"
@@ -135,14 +140,15 @@
                 </label>
             </div>
             <div class="col-md-6 mb-3">
+              <span style="color: #203f61">אזרחות נוכחית</span>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i
-                                class="fas fa-flag"></i></span>
+                        <span class="input-group-text">
+                          <i id="iconDesign" class="fas fa-flag"></i></span>
                     </div>
                     <select name="citizenship" id="citizenship"
                         class="custom-select" required>
-                        <option value="" disabled selected>אזרחות נוכחית</option>
+                        <option value="" disabled selected>לחץ כדי לבחור</option>
                         <option value="Israeli">ישראלית</option>
                         <option value="American">אמריקאית</option>
                         <option value="European">אירופאית</option>
