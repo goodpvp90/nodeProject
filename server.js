@@ -153,7 +153,6 @@ app.post('/takemortgage', function (req, res) {
 // Handle login form submission //#### TO DO , CHANGE IT TO EJS HANDLE!
 app.post('/login', function (req, res) {
   const { username, password } = req.body;
-  console.log(username);
   // Validate login credentials
   db.validateLogin(username, async function (err, row) {
     if (err || !row) {
@@ -161,7 +160,6 @@ app.post('/login', function (req, res) {
     } else {
       try {
         const hashedPassword = row.password;
-        console.log(hashedPassword);
         // Compare hashed password with the provided password
         const match = await bcrypt.compare(password, hashedPassword);
         if (match) {
@@ -185,7 +183,6 @@ app.post('/login', function (req, res) {
 app.post('/signup', async function (req, res) {
   const { fname, lname, password, rpassword, email, phone } = req.body;
   if ((signupVal.validate(fname, lname, email, password, rpassword, phone)) != true) {
-    console.log(signupVal.validate(fname, lname, email, password, rpassword, phone));
     renderTemplate(req, res, 'signup', { valresult: signupVal.validate(fname, lname, email, password, rpassword, phone) });
   }
   else {
