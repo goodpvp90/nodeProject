@@ -64,17 +64,17 @@ app.post('/restore', function (req, res) {
   const { username } = req.body;
 
   // Validate email
-  db.validateEmail(username, async function (err, row) {
+  db.validateEmail(username.toLowerCase(), async function (err, row) {
     if (err || !row) {
       res.redirect('/restore?result=false');
     } else {
       const randomPassword = generateRandomPassword();
       const hashedPassword = await bcrypt.hash(randomPassword, 10);
-      db.resetPassword(hashedPassword, username, function (err) {
+      db.resetPassword(hashedPassword, username.toLowerCase(), function (err) {
         if (err) {
           res.redirect('/restore?result=false');
         } else {
-          mailer.restorePassword(username, randomPassword);
+          mailer.restorePassword(username.toLowerCase(), randomPassword);
           res.redirect(`/restore?result=true&email=${username}`);
         }
       });
