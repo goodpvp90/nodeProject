@@ -39,8 +39,6 @@ body {
     height: 100dvh;
     width: calc(100% - 70px);
     transition: all 0.35s ease-in-out;
-    /*background-color: #fafbfe;*/
-    /*background-image: url(/images/professional-background.jpg);*/
     background-position: center;
     background-size: cover;
 }
@@ -89,11 +87,6 @@ body {
 #sidebar:not(.expand) .sidebar-logo,
 #sidebar:not(.expand) a.sidebar-link span {
     display: none;
-}
-
-#sidebar:not(.expand) .sidebar-item{
-    pointer-events: none;
-    opacity: 0.5;
 }
 
 .sidebar-nav {
