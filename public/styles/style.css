@@ -7,7 +7,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     /* Full height */
-    height: 100dvh;
+    height: 100vh;
     /* Center and scale the image nicely */
     background-position: center;
     background-size: cover;
@@ -15,7 +15,14 @@ body {
     /* Choose appropriate font */
     margin-top: 0;
     padding: 0;
-    overflow-y: auto;
+    
+}
+
+@media (max-width: 500px) {
+    /* Apply overflow-y: auto; when in landscape mode on small screens */
+    body {
+        overflow-y: auto;
+    }
 }
 
 .form-check-label {

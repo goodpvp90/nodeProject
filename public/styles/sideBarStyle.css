@@ -41,6 +41,7 @@ body {
     transition: all 0.35s ease-in-out;
     background-position: center;
     background-size: cover;
+    
 }
 
 #sidebar {
@@ -52,7 +53,26 @@ body {
     display: flex;
     flex-direction: column;
     height: 100dvh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+@media (max-width: 500px) {
+    /* Apply overflow-y: auto; when in landscape mode on small screens */
+    #sidebar {
+        overflow-y: auto;
+    }
     
+    main {
+        overflow-y: auto;
+    }
+
+}
+@media only screen and (max-height: 500px) and (orientation: landscape) {
+    /* Apply overflow-y: auto; when in landscape mode on small screens */
+    #sidebar {
+        height:400px;
+        overflow-y: auto;
+    }
 }
 
 #sidebar.expand {
